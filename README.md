@@ -59,9 +59,9 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 
 <!-- WakaTime (kept for later — re-enable by uncommenting this block and deleting the activity graph below)
 <!--START_SECTION:waka-->
-<p align="center">
+<!--p align="center">
   <img src="https://github-readme-stats.vercel.app/api/wakatime?username=9a0415d5-b481-447c-acc2-f73a5fed495c&layout=compact&langs_count=8&hide_border=true&bg_color=00000000&title_color=58a6ff&text_color=8b949e&range=all_time&custom_title=Where%20My%20Time%20Goes" alt="WakaTime stats"/>
-</p>
+</!--p>
 <!--END_SECTION:waka-->
 -->
 
