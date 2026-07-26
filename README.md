@@ -57,16 +57,15 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 
 ### Coding Activity
 
-<!-- WakaTime (kept for later — re-enable by uncommenting this block and deleting the activity graph below)
-<!--START_SECTION:waka-->
-<!--p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=9a0415d5-b481-447c-acc2-f73a5fed495c&layout=compact&langs_count=8&hide_border=true&bg_color=00000000&title_color=58a6ff&text_color=8b949e&range=all_time&custom_title=Where%20My%20Time%20Goes" alt="WakaTime stats"/>
-</!--p>
-<!--END_SECTION:waka-->
-
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=akashkuushwahaa&bg_color=00000000&color=58a6ff&line=58a6ff&point=c9d1d9&area=true&hide_border=true&custom_title=Contribution%20Activity" alt="Contribution activity graph"/>
+  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=9a0415d5-b481-447c-acc2-f73a5fed495c&layout=compact&langs_count=8&hide=markdown&hide_border=true&bg_color=00000000&title_color=58a6ff&text_color=8b949e&range=all_time&custom_title=All-Time%20Coding%20Activity" alt="WakaTime all-time stats"/>
 </p>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph.svg">
+  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph.svg">
+</picture>
 
 ---
 
