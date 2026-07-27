@@ -65,7 +65,7 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 
 ---
 
-### GitHub Stats
+<!-- ### GitHub Stats
 
 <p align="center">
   <img height="165" src="https://github-readme-stats.vercel.app/api?username=akashkuushwahaa&show_icons=true&hide_border=true&bg_color=00000000&title_color=58a6ff&text_color=8b949e&icon_color=58a6ff&include_all_commits=true&count_private=true" alt="GitHub stats"/>
@@ -76,7 +76,7 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
   <img src="https://streak-stats.demolab.com?user=akashkuushwahaa&hide_border=true&background=00000000&stroke=30363d&ring=58a6ff&fire=58a6ff&currStreakLabel=58a6ff&sideLabels=8b949e&dates=8b949e&currStreakNum=c9d1d9&sideNums=c9d1d9" alt="GitHub streak"/>
 </p>
 
----
+--- -->
 
 ### Profile Summary
 
