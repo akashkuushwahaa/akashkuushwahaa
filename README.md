@@ -68,11 +68,11 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 <!--START_SECTION:waka-->
 
 ```txt
-From: 01 August 2026
-
-Total Time: 0 hrs 0 mins
-
-Unknown   0 hrs 0 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+TypeScript                         ██████▓░░░░░░░░░░░░░░░░░░   26.25 %
+Python                             █▓░░░░░░░░░░░░░░░░░░░░░░░   06.84 %
+Bash                               █▒░░░░░░░░░░░░░░░░░░░░░░░   05.16 %
+CSS                                █░░░░░░░░░░░░░░░░░░░░░░░░   04.07 %
+JSON                               █░░░░░░░░░░░░░░░░░░░░░░░░   03.47 %
 ```
 
 <!--END_SECTION:waka-->
