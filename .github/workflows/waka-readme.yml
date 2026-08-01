@@ -17,8 +17,10 @@ jobs:
       - uses: athul/waka-readme@master
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-          # Point the WakaTime-compatible action at your Wakapi instance
-          API_BASE_URL: https://wakapi.dev/api/compat/wakatime/v1
+          # Point the WakaTime-compatible action at your Wakapi instance.
+          # NOTE: the action appends "/v1/users/current/stats/..." itself,
+          # so this base URL must NOT include a trailing /v1.
+          API_BASE_URL: https://wakapi.dev/api/compat/wakatime
           TIME_RANGE: all_time
           SHOW_TITLE: "true"
           SHOW_TOTAL: "true"
