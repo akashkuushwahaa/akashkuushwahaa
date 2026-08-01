@@ -58,6 +58,8 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 
 ### Coding Activity
 
+<sub>⏱️ Tracked from Aug 1, 2026</sub>
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph.svg">
