@@ -69,7 +69,7 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 <!--START_SECTION:waka-->
 
 ```txt
-From: 01 January 1970 - To: 01 August 2026
+From: 01 August 2026
 
 Total Time: 0 hrs 0 mins
 
