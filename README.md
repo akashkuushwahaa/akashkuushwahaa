@@ -57,25 +57,12 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 
 ### Coding Activity
 
-<sub>📊 Language activity via WakaTime — Wakapi will take over once it has enough history</sub>
+<sub>📊 Live from WakaTime — updates automatically</sub>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph.svg">
-  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph.svg">
-</picture>
-
-<!--START_SECTION:waka-->
-
-```txt
-TypeScript                         ██████▓░░░░░░░░░░░░░░░░░░   26.25 %
-Python                             █▓░░░░░░░░░░░░░░░░░░░░░░░   06.84 %
-Bash                               █▒░░░░░░░░░░░░░░░░░░░░░░░   05.16 %
-CSS                                █░░░░░░░░░░░░░░░░░░░░░░░░   04.07 %
-JSON                               █░░░░░░░░░░░░░░░░░░░░░░░░   03.47 %
-```
-
-<!--END_SECTION:waka-->
+<p align="center">
+  <img width="48%" alt="Languages breakdown over the last 7 days" src="https://wakatime.com/share/@9a0415d5-b481-447c-acc2-f73a5fed495c/97205440-8516-461d-88bb-afe90e859d74.svg" />
+  <img width="48%" alt="Coding activity over the last 7 days" src="https://wakatime.com/share/@9a0415d5-b481-447c-acc2-f73a5fed495c/b547308f-f333-4acd-9a55-80414e35ebe8.svg" />
+</p>
 
 ---
 
