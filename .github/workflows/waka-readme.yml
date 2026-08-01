@@ -28,5 +28,5 @@ jobs:
           SHOW_TOTAL: "false"
           SHOW_TIME: "false"
           SHOW_MASKED_TIME: "false"
-          IGNORED_LANGUAGES: "Markdown Text"
+          IGNORED_LANGUAGES: "Text"
           LANG_COUNT: "6"
