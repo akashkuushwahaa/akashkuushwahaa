@@ -1,0 +1,25 @@
+name: WakaTime Readme Stats
+
+on:
+  schedule:
+    # Runs once a day at 01:00 UTC
+    - cron: "0 1 * * *"
+  workflow_dispatch: # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    name: Update README with coding stats
+    runs-on: ubuntu-latest
+    steps:
+      - uses: athul/waka-readme@master
+        with:
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          # Point the WakaTime-compatible action at your Wakapi instance
+          API_BASE_URL: https://wakapi.dev/api/compat/wakatime/v1
+          TIME_RANGE: all_time
+          SHOW_TITLE: "true"
+          SHOW_TOTAL: "true"
+          LANG_COUNT: "6"

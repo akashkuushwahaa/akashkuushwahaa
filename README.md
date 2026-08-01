@@ -7,6 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/akashkuushwahaa?tab=followers"><img src="https://img.shields.io/github/followers/akashkuushwahaa?label=Followers&style=flat-square&color=0d1117&labelColor=0d1117" alt="Followers"/></a>
+  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fwakapi.dev%2Fapi%2Fcompat%2Fshields%2Fv1%2Fakashkuushwahaa%2Finterval%3Aany&style=flat-square&logo=wakatime&logoColor=white&label=coding+time&color=blue" alt="Total coding time"/>
   <img src="https://komarev.com/ghpvc/?username=akashkuushwahaa&style=flat-square&color=blue&label=Profile+Views" alt="Profile views"/>
 </p>
 
@@ -62,6 +63,9 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph.svg">
   <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/akashkuushwahaa/akashkuushwahaa/output/pacman-contribution-graph.svg">
 </picture>
+
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
 
 ---
 
