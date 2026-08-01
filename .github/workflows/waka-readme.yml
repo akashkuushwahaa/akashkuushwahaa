@@ -16,12 +16,17 @@ jobs:
     steps:
       - uses: athul/waka-readme@master
         with:
+          # Source: WakaTime (has history). The secret must hold the WakaTime
+          # key (waka_...), NOT the Wakapi key. When Wakapi has enough data,
+          # switch back by setting the secret to the Wakapi key and adding:
+          #   API_BASE_URL: https://wakapi.dev/api/compat/wakatime
+          # (No API_BASE_URL here -> defaults to https://wakatime.com/api.)
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-          # Point the WakaTime-compatible action at your Wakapi instance.
-          # NOTE: the action appends "/v1/users/current/stats/..." itself,
-          # so this base URL must NOT include a trailing /v1.
-          API_BASE_URL: https://wakapi.dev/api/compat/wakatime
           TIME_RANGE: all_time
-          SHOW_TITLE: "true"
-          SHOW_TOTAL: "true"
+          # Show only the language-mix bars — no hours, no totals, no date line.
+          SHOW_TITLE: "false"
+          SHOW_TOTAL: "false"
+          SHOW_TIME: "false"
+          SHOW_MASKED_TIME: "false"
+          IGNORED_LANGUAGES: "Markdown Text"
           LANG_COUNT: "6"
