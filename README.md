@@ -65,6 +65,15 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 </picture>
 
 <!--START_SECTION:waka-->
+
+```txt
+From: 01 January 1970 - To: 01 August 2026
+
+Total Time: 0 hrs 0 mins
+
+Unknown   0 hrs 0 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+```
+
 <!--END_SECTION:waka-->
 
 ---
