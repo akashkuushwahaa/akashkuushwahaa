@@ -56,16 +56,11 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 ---
 
 ### Coding Activity
-
-<sub>📊 Live from WakaTime — updates automatically</sub>
-
 <p align="center">
-  <strong>Languages · last 7 days</strong><br/>
   <img width="70%" alt="Languages breakdown over the last 7 days" src="https://wakatime.com/share/@9a0415d5-b481-447c-acc2-f73a5fed495c/97205440-8516-461d-88bb-afe90e859d74.svg" />
 </p>
 
 <p align="center">
-  <strong>Coding activity · last 7 days</strong><br/>
   <img width="70%" alt="Coding activity over the last 7 days" src="https://wakatime.com/share/@9a0415d5-b481-447c-acc2-f73a5fed495c/b547308f-f333-4acd-9a55-80414e35ebe8.svg" />
 </p>
 
