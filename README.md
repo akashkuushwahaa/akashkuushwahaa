@@ -56,6 +56,11 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 ---
 
 ### Coding Activity
+
+<!--START_SECTION:codetime-->
+> ⏱️ **39 hrs 24 mins** of tracked coding · since 13 Jun 2026 · **50 days** in
+<!--END_SECTION:codetime-->
+
 <p align="center">
   <img width="70%" alt="Languages breakdown over the last 7 days" src="https://wakatime.com/share/@9a0415d5-b481-447c-acc2-f73a5fed495c/97205440-8516-461d-88bb-afe90e859d74.svg" />
 </p>
