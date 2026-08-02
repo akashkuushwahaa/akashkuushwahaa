@@ -69,6 +69,15 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
   <img width="70%" alt="Coding activity over the last 7 days" src="https://wakatime.com/share/@9a0415d5-b481-447c-acc2-f73a5fed495c/b547308f-f333-4acd-9a55-80414e35ebe8.svg" />
 </p>
 
+<p align="center"><strong>Most time spent · by project</strong></p>
+
+<p align="center">
+  <img alt="job-pilot" src="https://wakatime.com/badge/user/9a0415d5-b481-447c-acc2-f73a5fed495c/project/7dae5c72-3828-4b9d-ac8d-ee13f04bc03f.svg?label=job-pilot&style=flat-square&color=8957e5" /><br/>
+  <img alt="code-review-agent" src="https://wakatime.com/badge/user/9a0415d5-b481-447c-acc2-f73a5fed495c/project/8dac4807-63df-46f2-8d41-430435980acf.svg?label=code-review-agent&style=flat-square&color=3fb950" /><br/>
+  <img alt="portfolio" src="https://wakatime.com/badge/user/9a0415d5-b481-447c-acc2-f73a5fed495c/project/f9000214-c98f-439f-ae20-45b3f85e2a46.svg?label=portfolio&style=flat-square&color=8957e5" /><br/>
+  <img alt="akashkuushwahaa" src="https://wakatime.com/badge/user/9a0415d5-b481-447c-acc2-f73a5fed495c/project/556f601b-cc82-4016-b682-64ec1fd362e8.svg?label=akashkuushwahaa&style=flat-square&color=db2777" />
+</p>
+
 ---
 
 <!-- ### GitHub Stats
