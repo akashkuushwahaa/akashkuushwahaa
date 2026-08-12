@@ -1,0 +1,119 @@
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+% ---------------- Style ----------------
+\moderncvstyle{banking}
+\moderncvcolor{black}
+\nopagenumbers{}
+
+% ---------------- Encoding & Layout ----------------
+\usepackage[utf8]{inputenc}
+\usepackage[
+  top=0.5cm,
+  bottom=0.5cm,
+  left=1.0cm,
+  right=1.0cm
+]{geometry}
+
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+
+\setlength{\hintscolumnwidth}{2.5cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% -------- One-page fit knobs --------
+% If the resume still spills to page 2, lower linespread to 0.96, then 0.94.
+% If it ends up with too much empty space at the bottom, raise it back to 1.0.
+\linespread{1.0}
+
+% -------- Simple Bullet Style --------
+\setlist[itemize]{
+  leftmargin=0.45cm,
+  itemsep=0pt,
+  topsep=1pt,
+  parsep=0pt,
+  label=\textbullet
+}
+
+% Custom Link Color
+\definecolor{linkcolor}{rgb}{0.1, 0.4, 0.7}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=linkcolor,
+    linkcolor=linkcolor
+}
+
+% Disable default moderncv header
+\renewcommand*{\makecvtitle}{}
+
+\begin{document}
+
+% ========== CUSTOM FULL-WIDTH HEADER ==========
+\begin{center}
+    {\Huge\bfseries Akash Kushwaha}\\[1.2ex]\small
+    \faEnvelope\ \href{mailto:akashkuushwahaa@gmail.com}{akashkuushwahaa@gmail.com}\quad\textbar\quad
+    \faPhone\ +91 76986 50093\quad\textbar\quad
+    \faMapMarker\ Ahmedabad, Gujarat, India\\[0.5ex]
+    \faLinkedin\ \href{https://linkedin.com/in/akashkuushwahaa}{linkedin.com/in/akashkuushwahaa} \quad\textbar\quad
+    \faGithub\ \href{https://github.com/akashkuushwahaa}{github.com/akashkuushwahaa} \quad\textbar\quad
+    \faCode\ \href{https://leetcode.com/u/akashkuushwahaa/}{leetcode.com/u/akashkuushwahaa}
+\end{center}
+
+% ---------------- Summary ----------------
+\section{Professional Summary}
+\textbf{Software Engineer} building full-stack web applications and \textbf{LLM-powered tools} in \textbf{TypeScript, JavaScript, Python, React.js, Next.js, and Node.js}. Shipped full-stack dashboard features during a three-month SDE internship, owning both the Next.js API routes behind them and the React interfaces on top, and built a security code-review agent that runs in a GitHub Actions CI/CD pipeline and uses RAG retrieval to reach 0.914 F1 on a labeled evaluation set.
+
+% ---------------- Skills ----------------
+\section{Technical Skills}
+\begin{itemize}
+  \item \textbf{Languages:} JavaScript, TypeScript, Python, Java, SQL
+  \item \textbf{Frontend:} React.js, Next.js, Tailwind CSS, Zustand (State Management)
+  \item \textbf{Backend:} Node.js, Express.js, Next.js API Routes, FastAPI, RESTful APIs, JWT Authentication
+  \item \textbf{AI \& LLM:} OpenAI API, RAG, Vector Databases (Chroma), Prompt Engineering, LLM Evaluation (Precision/Recall/F1)
+  \item \textbf{Databases:} MongoDB (Mongoose), PostgreSQL, SQLite, MYSQL
+  \item \textbf{DevOps \& Tools:} Git, GitHub Actions, CI/CD, Docker, Linux (Bash)
+\end{itemize}
+
+% ---------------- Experience ----------------
+\section{Experience}
+\textbf{Software Development Engineer Intern} \hfill Sep 2025 -- Nov 2025 \\
+{\parfillskip=0pt\relax \href{https://www.culturex.ai/}{CultureX}\hfill\textit{Onsite}\par}
+\begin{itemize}
+  \item Built the Shopify Coupons Listing module end to end, from Next.js API routes to reusable React.js and Tailwind CSS components, cutting development time for new features by \textbf{30\%}.
+  \item Implemented Link Tracker across the stack, writing server-side data flows with Next.js API routes and Server Actions plus the dashboard UI that consumed them, giving users real-time engagement visibility.
+  \item Engineered global state management with Zustand and enforced type-safety with Zod, reducing runtime UI errors by \textbf{25\%}.
+  \item Improved Core Web Vitals by restructuring components and adding analytics instrumentation to locate slow render paths.
+  % VERIFY: added to capture "Agile" + "code review" keywords. Adjust to your actual process or delete.
+  \item Reviewed pull requests and shipped weekly releases in an Agile team workflow.
+\end{itemize}
+
+% ---------------- Projects ----------------
+\section{Projects}
+
+\textbf{Code Review Agent: Automated Security PR Reviewer} \hfill \href{https://github.com/akashkuushwahaa/code-review-agent}{\textbf{[GitHub]}} \\
+{\small\textit{Python, OpenAI API, RAG, Chroma, FastAPI, Next.js, SQLite, Docker, GitHub Actions}}
+\begin{itemize}
+  \item Built a security-scoped review agent that flags hardcoded secrets and SQL or command injection, posting line-anchored comments automatically on every pull request.
+  \item Added a labeled evaluation harness (precision, recall, F1 on 20 cases) and A/B-tested retrieval: full-file and cross-file context raised F1 from \textbf{0.82 to 0.914}.
+  \item Persisted findings with cross-run deduplication and containerized the stack (agent, API service, dashboard) behind a single compose file.
+\end{itemize}
+
+\vspace{0.8mm}
+
+\textbf{JobPilot: AI Job Discovery \& Company Research Agent} \hfill \href{https://jobpilot-sigma-rose.vercel.app/}{\textbf{[Live]}} \textbar\ \href{https://github.com/akashkuushwahaa/job-pilot}{\textbf{[GitHub]}} \\
+{\small\textit{Next.js 16, React 19, TypeScript, GPT-4o, PostgreSQL, Browserbase, Stagehand, Adzuna API}}
+\begin{itemize}
+  \item Built and deployed a full-stack AI job agent that discovers live postings and scores each 0--100 against the user's resume, surfacing matched and missing skills.
+  \item Automated company research with a headless browser session that crawls employer pages into a structured dossier; each phase degrades gracefully, so a dead link costs one section, not the run.
+  \item Designed a four-table relational schema with per-user row-level security, plus PDF resume parsing and generation and a dashboard charting activity from the database rather than analytics events.
+\end{itemize}
+
+% ---------------- Education ----------------
+\section{Education}
+
+\textbf{Bachelor of Technology in Computer Science \& Engineering (AI \& ML)} \hfill \textit{Expected Graduation: 2027} \\
+SAL Institute of Technology and Engineering Research \hfill \textit{Gujarat, India}
+
+\end{document}
