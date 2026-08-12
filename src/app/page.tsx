@@ -44,7 +44,7 @@ export default function Page() {
                                         href={DATA.resumeUrl}
                                         className="underline underline-offset-4 hover:text-foreground"
                                     >
-                                        Résumé
+                                        Resume
                                     </Link>
                                 </p>
                             </BlurFade>

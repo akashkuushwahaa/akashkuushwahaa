@@ -47,6 +47,7 @@ matching the markdown filename, or the card links nowhere.
 | `/projects` | `content/projects/*.md` frontmatter |
 | `/projects/[slug]` | `content/projects/<slug>.md` |
 | `/work/[slug]` | `content/work/<slug>.md` |
+| `/resume` | embeds `public/resume.pdf`, compiled from `resume/main.tex` |
 
 All are statically generated at build time.
 
