@@ -23,10 +23,10 @@ set. Adding cross-file context from a vector store took it to 0.914. Nothing
 about the prompt changed; the retrieval did. I only knew that because I'd built
 the labeled set first.
 
-Before that I spent three months as an SDE intern at CultureX shipping React
-features into a production dashboard on a weekly release cycle, which is where
-I learned what code review and Agile actually mean when they aren't a bullet on
-a syllabus.
+Before that I spent three months as an SDE intern at CultureX shipping
+full-stack dashboard features on a weekly release cycle — the Next.js API routes
+behind them and the React interfaces on top. That is where I learned what code
+review and Agile actually mean when they aren't a bullet on a syllabus.
 
 I'm finishing a B.Tech in Computer Science & Engineering (AI & ML) at SAL Institute of
 Technology, expected 2027. Currently open to work.
