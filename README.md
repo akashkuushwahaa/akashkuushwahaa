@@ -89,7 +89,7 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 
 <p align="center">
   <a href="https://linkedin.com/in/akashkuushwahaa"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-  <a href="mailto:surajk.culturex@gmail.com"><img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email"/></a>
+  <a href="mailto:akashkuushwahaa@gmail.com"><img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email"/></a>
 </p>
 
 <p align="center"><sub><i>Float like a Cadillac, sting like a Beemer.</i></sub></p>

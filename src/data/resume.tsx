@@ -48,7 +48,7 @@ export const DATA = {
         { href: "/projects", icon: FolderIcon, label: "Projects" },
     ],
     contact: {
-        email: "surajk.culturex@gmail.com",
+        email: "akashkuushwahaa@gmail.com",
         social: {
             GitHub: {
                 name: "GitHub",
@@ -64,7 +64,7 @@ export const DATA = {
             },
             email: {
                 name: "Send Email",
-                url: "mailto:surajk.culturex@gmail.com",
+                url: "mailto:akashkuushwahaa@gmail.com",
                 icon: Icons.email,
                 navbar: true,
             },
