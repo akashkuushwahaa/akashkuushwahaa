@@ -2,7 +2,7 @@
 title: Code Review Agent
 slug: code-review-agent
 summary: A security-scoped PR reviewer that runs in GitHub Actions and posts line-anchored findings.
-tags: [Python, OpenAI, Chroma (RAG), FastAPI, Next.js, SQLite, Docker]
+tags: [Python, OpenAI, Chroma (RAG), FastAPI, Next.js, SQLite, Docker, GitHub Actions]
 repo: https://github.com/akashkuushwahaa/code-review-agent
 featured: true
 role: Solo build

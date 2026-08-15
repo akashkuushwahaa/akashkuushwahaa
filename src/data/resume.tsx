@@ -14,7 +14,7 @@ export const DATA = {
     resumeUrl: "/resume",
     resumeFile: "/resume.pdf",
     skills: {
-        Languages: ["TypeScript", "Python", "JavaScript", "Java"],
+        Languages: ["TypeScript", "Python", "JavaScript", "Java", "SQL"],
         "LLM Engineering": [
             "OpenAI API",
             "RAG",
@@ -40,8 +40,17 @@ export const DATA = {
             "REST APIs",
             "JWT",
         ],
-        Data: ["PostgreSQL", "MongoDB", "SQLite", "Chroma"],
-        Tooling: ["Docker", "GitHub Actions", "Streamlit", "Arcjet", "Git"],
+        Data: ["PostgreSQL", "MongoDB", "MySQL", "SQLite", "Chroma"],
+        Tooling: [
+            "Git",
+            "GitHub Actions",
+            "Docker",
+            "AWS",
+            "Linux",
+            "Streamlit",
+            "Arcjet",
+            "Claude Code",
+        ],
     } as Record<string, string[]>,
     navbar: [
         { href: "/", icon: HomeIcon, label: "Home" },
@@ -137,6 +146,7 @@ export const DATA = {
                 "Next.js",
                 "SQLite",
                 "Docker",
+                "GitHub Actions",
             ],
             links: [
                 {
@@ -165,6 +175,8 @@ export const DATA = {
                 "TypeScript",
                 "OpenAI",
                 "Stagehand",
+                "Browserbase",
+                "Adzuna API",
                 "PostgreSQL",
                 "Zod",
             ],

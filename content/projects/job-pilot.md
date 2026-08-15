@@ -2,7 +2,7 @@
 title: Job Pilot
 slug: job-pilot
 summary: An agentic job-search platform that sources postings, researches companies, scores fit, and generates a tailored resume.
-tags: [Next.js, TypeScript, OpenAI, Stagehand, PostgreSQL, Zod]
+tags: [Next.js, TypeScript, OpenAI, Stagehand, Browserbase, Adzuna API, PostgreSQL, Zod]
 repo: https://github.com/akashkuushwahaa/job-pilot
 live: https://jobpilot-sigma-rose.vercel.app/
 featured: true
