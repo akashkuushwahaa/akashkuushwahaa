@@ -10,7 +10,6 @@ export const DATA = {
     description: "Full-stack engineer • LLM tooling in TypeScript and Python",
     summary:
         "I build full-stack web applications and LLM-powered tools, mostly in TypeScript and Python.\n\nThe work I care about sits where a product meets a model. It is easy to get a language model to produce something that looks correct. Getting it to produce something correct enough to put in front of a user, repeatedly, is a different problem, and it turns out to be an engineering problem more than a prompting one: retrieval, evaluation, guardrails, and knowing when to keep a human in the loop.\n\nThat is what the [Code Review Agent](/projects/code-review-agent) taught me. It started at 0.82 F1 on a labeled set and reached 0.914. Nothing about the prompt changed; the retrieval did. I only knew that because I had built the labeled set first.\n\nBefore that I spent three months as an SDE intern at [CultureX](https://www.culturex.ai), shipping full-stack dashboard features on a weekly release cycle — the Next.js API routes behind them and the React interfaces on top. I am finishing a B.Tech in Computer Science & Engineering (AI & ML) at SAL Institute of Technology, expected 2027, and I am currently open to work.",
-    avatarUrl: "",
     resumeUrl: "/resume",
     resumeFile: "/resume.pdf",
     skills: {

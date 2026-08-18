@@ -3,7 +3,6 @@ import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
@@ -16,7 +15,7 @@ export default function Page() {
         <main id="main" className="flex min-h-[100dvh] flex-col space-y-10">
             <section id="hero">
                 <div className="mx-auto w-full max-w-2xl space-y-8">
-                    <div className="flex justify-between gap-2">
+                    <div className="flex flex-col gap-2">
                         <div className="flex flex-1 flex-col space-y-1.5">
                             <BlurFadeText
                                 delay={BLUR_FADE_DELAY}
@@ -49,13 +48,6 @@ export default function Page() {
                                 </p>
                             </BlurFade>
                         </div>
-                        <BlurFade delay={BLUR_FADE_DELAY}>
-                            <Avatar className="size-28 border">
-                                <AvatarFallback className="bg-transparent font-mono text-2xl font-medium tracking-ui">
-                                    {DATA.initials}
-                                </AvatarFallback>
-                            </Avatar>
-                        </BlurFade>
                     </div>
                 </div>
             </section>
@@ -95,7 +87,10 @@ export default function Page() {
                                         </span>
                                         <div className="flex flex-wrap gap-1">
                                             {skills.map((skill) => (
-                                                <Badge key={skill}>
+                                                <Badge
+                                                    key={skill}
+                                                    variant="outline"
+                                                >
                                                     {skill}
                                                 </Badge>
                                             ))}
@@ -173,7 +168,7 @@ export default function Page() {
             <section id="projects">
                 <div className="w-full space-y-12 py-12">
                     <BlurFade delay={BLUR_FADE_DELAY * 11}>
-                        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+                        <div className="flex flex-col space-y-4">
                             <div className="space-y-2">
                                 <div className="inline-block rounded-lg bg-foreground px-3 py-1 text-sm text-background">
                                     Projects
@@ -211,7 +206,7 @@ export default function Page() {
             </section>
 
             <section id="contact">
-                <div className="grid w-full items-center justify-center gap-4 px-4 py-12 text-center md:px-6">
+                <div className="w-full py-12">
                     <BlurFade delay={BLUR_FADE_DELAY * 16}>
                         <div className="space-y-3">
                             <div className="inline-block rounded-lg bg-foreground px-3 py-1 text-sm text-background">
@@ -220,7 +215,7 @@ export default function Page() {
                             <h2 className="text-3xl font-semibold leading-tight tracking-display sm:text-5xl">
                                 Open to work
                             </h2>
-                            <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                            <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                                 I am looking for engineering work on products
                                 that put a model in front of real users. Send me{" "}
                                 <Link
