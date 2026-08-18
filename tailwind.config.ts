@@ -27,7 +27,7 @@ const config = {
             },
             letterSpacing: {
                 display: "-2.4px",
-                heading: "-2.4px",
+                heading: "-0.96px",
                 subheading: "-1.28px",
                 "card-title": "-0.96px",
                 ui: "-0.32px",
