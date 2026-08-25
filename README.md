@@ -1,11 +1,12 @@
 <h1 align="center">Akash Kushwaha</h1>
 
 <p align="center">
-  Building AI agents and full-stack products. <br/>
-  <sub>Ahmedabad, India</sub>
+  Full-stack engineer · LLM tooling in TypeScript and Python <br/>
+  <sub>Ahmedabad, India · Open to work</sub>
 </p>
 
 <p align="center">
+  <a href="https://akashkuushwahaa.vercel.app"><img src="https://img.shields.io/badge/Portfolio-akashkuushwahaa.vercel.app-0d1117?style=flat-square&logo=vercel&logoColor=white&labelColor=0d1117" alt="Portfolio"/></a>
   <a href="https://github.com/akashkuushwahaa?tab=followers"><img src="https://img.shields.io/github/followers/akashkuushwahaa?label=Followers&style=flat-square&color=0d1117&labelColor=0d1117" alt="Followers"/></a>
   <img src="https://komarev.com/ghpvc/?username=akashkuushwahaa&style=flat-square&color=blue&label=Profile+Views" alt="Profile views"/>
 </p>
@@ -14,11 +15,15 @@
 
 ### About
 
-I work mostly at the intersection of **LLM agents** and **web engineering** — Python for the agent side, TypeScript/Next.js for everything users actually touch.
+I build full-stack web applications and LLM-powered tools. The work I care about
+sits where a product meets a model — getting one to produce something *correct
+enough to put in front of a user, repeatedly* turns out to be an engineering
+problem more than a prompting one: retrieval, evaluation, guardrails, and
+knowing when to keep a human in the loop.
 
-- Currently building autonomous developer tooling: code review agents, research copilots, local task runners
-- Comfortable across the stack: React/Next.js, Node, Python, Java, Postgres/MongoDB
-- Always sharpening fundamentals — DSA in Java, systems, and clean architecture
+- Shipped full-stack dashboard features as an SDE intern at [CultureX](https://www.culturex.ai) — the Next.js API routes and the React interfaces on top
+- Building agent tooling that is measured rather than asserted: labeled eval sets, precision/recall, A/B'd retrieval
+- Finishing a B.Tech in Computer Science & Engineering (AI & ML), expected 2027
 - Open to collaboration on AI-agent and developer-tooling projects
 
 ---
@@ -26,32 +31,55 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 ### Tech Stack
 
 **Languages**
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![Java](https://img.shields.io/badge/Java-007396?style=flat-square&logo=openjdk&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
 
-**Frameworks & Tools**
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
+**Frontend**
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
 ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-2D3748?style=flat-square)
+![Zod](https://img.shields.io/badge/Zod-3E67B1?style=flat-square&logo=zod&logoColor=white)
+
+**Backend**
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+
+**AI & LLM**
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white)
+![RAG](https://img.shields.io/badge/RAG-1a1a1a?style=flat-square)
+![Chroma](https://img.shields.io/badge/Chroma-FF6B6B?style=flat-square)
+
+**Data & Infra**
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white)
 
 ---
 
 ### Selected Work
 
-| Project | What it does | Stack |
+Each of these has a full write-up on the
+[portfolio](https://akashkuushwahaa.vercel.app/projects) — the problem, the
+decisions that mattered, what the numbers did, and what I would change.
+
+| Project | What it does | Measured |
 | :--- | :--- | :--- |
-| [code-review-agent](https://github.com/akashkuushwahaa/code-review-agent) | Automated PR review agent that reads diffs and comments like a senior dev | Python |
-| [research-copilot](https://github.com/akashkuushwahaa/research-copilot) | Agentic research assistant — searches, reads and synthesises sources | Python |
-| [local-task-agent](https://github.com/akashkuushwahaa/local-task-agent) | Runs multi-step tasks locally with tool access, no cloud dependency | Python |
-| [job-pilot](https://github.com/akashkuushwahaa/job-pilot) | End-to-end job application assistant | TypeScript |
-| [threads](https://github.com/akashkuushwahaa/threads) | Full-stack Threads clone with auth, feeds and communities | Next.js, MongoDB |
+| [Code Review Agent](https://github.com/akashkuushwahaa/code-review-agent) | Security-scoped PR reviewer. Reads every diff, flags hardcoded secrets and SQL or command injection, posts line-anchored comments through GitHub Actions | F1 **0.82 → 0.914** on a labeled set, from retrieval alone |
+| [Job Pilot](https://jobpilot-sigma-rose.vercel.app/) | Agentic job search. Sources live postings, researches each company with a headless browser, scores fit against your resume, generates a tailored PDF | Live |
+| [Subscription API](https://github.com/akashkuushwahaa/subscription-tracker) | Full subscription lifecycle over REST — JWT auth, role-scoped routes, edge rate limiting and bot detection, scheduled renewal reminders | — |
+| [Job Application Assistant](https://github.com/akashkuushwahaa/job-application-assistant) | Four-stage LLM pipeline that matches a resume to a posting, names the gaps, drafts the letter, rewrites the resume — every claim bound to a parsed fact | **~25 min → under 1 min** per tailored application |
+
+Also on GitHub: [research-copilot](https://github.com/akashkuushwahaa/research-copilot),
+[local-task-agent](https://github.com/akashkuushwahaa/local-task-agent),
+[threads](https://github.com/akashkuushwahaa/threads).
 
 ---
 
@@ -88,8 +116,10 @@ I work mostly at the intersection of **LLM agents** and **web engineering** — 
 ### Connect
 
 <p align="center">
+  <a href="https://akashkuushwahaa.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0d1117?style=flat-square&logo=vercel&logoColor=white" alt="Portfolio"/></a>
   <a href="https://linkedin.com/in/akashkuushwahaa"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
   <a href="mailto:akashkuushwahaa@gmail.com"><img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email"/></a>
+  <a href="https://akashkuushwahaa.vercel.app/resume"><img src="https://img.shields.io/badge/Resume-0d1117?style=flat-square&logo=readdotcv&logoColor=white" alt="Resume"/></a>
 </p>
 
 <p align="center"><sub><i>Float like a Cadillac, sting like a Beemer.</i></sub></p>
