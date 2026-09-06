@@ -15,10 +15,7 @@ const DOWNLOAD_NAME = "Akash-Kushwaha-Resume.pdf";
 
 export default function ResumePage() {
     return (
-        <main
-            id="main"
-            className="relative left-1/2 flex min-h-[100dvh] w-[92vw] max-w-[900px] -translate-x-1/2 flex-col pb-24"
-        >
+        <main id="main" className="mx-auto flex w-full max-w-[900px] flex-col">
             <BlurFade delay={BLUR_FADE_DELAY}>
                 <Link
                     href="/"

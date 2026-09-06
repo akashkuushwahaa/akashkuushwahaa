@@ -5,3 +5,5 @@ export const getCaseStudy = (slug: string) => getDoc("projects", slug);
 
 export const getWorkStudies = () => getDocs("work");
 export const getWorkStudy = (slug: string) => getDoc("work", slug);
+
+export const getAbout = () => getDoc("", "about");

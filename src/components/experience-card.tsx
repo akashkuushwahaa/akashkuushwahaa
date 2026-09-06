@@ -1,15 +1,7 @@
-"use client";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { ChevronRightIcon } from "lucide-react";
+import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
-// src/components/experience-card.tsx
 interface ExperienceCardProps {
     logoUrl: string;
     altText: string;
@@ -20,9 +12,9 @@ interface ExperienceCardProps {
     period: string;
     description?: string;
     bullets?: readonly string[];
-    defaultExpanded?: boolean;
 }
-export const ExperienceCard = ({
+
+export function ExperienceCard({
     logoUrl,
     altText,
     title,
@@ -32,114 +24,88 @@ export const ExperienceCard = ({
     period,
     description,
     bullets,
-    defaultExpanded = false,
-}: ExperienceCardProps) => {
-    const [isExpanded, setIsExpanded] = React.useState(defaultExpanded);
+}: ExperienceCardProps) {
+    const hasDetails = Boolean(description || bullets?.length);
 
-    const handleClick = (
-        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-    ) => {
-        if (description || bullets) {
-            e.preventDefault();
-            setIsExpanded(!isExpanded);
-        }
-    };
+    return (
+        <article className="py-6 sm:py-8">
+            <div className="grid gap-5 sm:grid-cols-[1fr_auto] sm:items-start">
+                <div className="flex min-w-0 items-start gap-4">
+                    <Avatar className="size-10 shrink-0 border border-border bg-background">
+                        <AvatarImage
+                            src={logoUrl}
+                            alt={altText}
+                            className="object-contain"
+                        />
+                        <AvatarFallback className="bg-muted text-xs">
+                            {altText[0]}
+                        </AvatarFallback>
+                    </Avatar>
 
-    const mainCard = (
-        <Card className="flex shadow-card">
-            <div className="flex-none">
-                <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
-                    <AvatarImage
-                        src={logoUrl}
-                        alt={altText}
-                        className="object-contain"
-                    />
-                    <AvatarFallback>{altText[0]}</AvatarFallback>
-                </Avatar>
-            </div>
-            <div className="flex-grow ml-4 items-center flex-col group">
-                <CardHeader>
-                    <div className="flex items-center justify-between gap-x-2 text-base">
-                        <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
-                            {title}
-                            {badges && (
-                                <span className="inline-flex gap-x-1">
-                                    {badges.map((badge, index) => (
-                                        <Badge
-                                            variant="secondary"
-                                            className="align-middle text-xs"
-                                            key={index}
-                                        >
-                                            {badge}
-                                        </Badge>
-                                    ))}
+                    <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            {href ? (
+                                <Link
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group/title inline-flex items-center gap-1.5 text-lg font-medium tracking-ui transition-colors duration-base hover:text-brand"
+                                >
+                                    {title}
+                                    <ArrowUpRightIcon className="size-3.5 text-muted-foreground transition-transform duration-medium ease-out-expo group-hover/title:-translate-y-0.5 group-hover/title:translate-x-0.5 motion-reduce:transition-none" />
+                                </Link>
+                            ) : (
+                                <h3 className="text-lg font-medium tracking-ui">
+                                    {title}
+                                </h3>
+                            )}
+                            {badges?.map((badge) => (
+                                <span
+                                    key={badge}
+                                    className="font-mono text-[9px] uppercase tracking-label text-brand"
+                                >
+                                    {badge}
                                 </span>
-                            )}
-                            {href && (
-                                <ChevronRightIcon
-                                    className={cn(
-                                        "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
-                                        isExpanded ? "rotate-90" : "rotate-0"
-                                    )}
-                                />
-                            )}
-                        </h3>
-                        <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
-                            {period}
+                            ))}
                         </div>
-                    </div>
-                    {subtitle && (
-                        <div className="font-sans text-xs">{subtitle}</div>
-                    )}
-                </CardHeader>
-                {(description || bullets) && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{
-                            opacity: isExpanded ? 1 : 0,
-
-                            height: isExpanded ? "auto" : 0,
-                        }}
-                        transition={{
-                            duration: 0.7,
-                            ease: [0.16, 1, 0.3, 1],
-                        }}
-                        className="mt-2 text-xs sm:text-sm"
-                    >
-                        {description && (
-                            <div className="mb-2 text-muted-foreground">
-                                {description}
-                            </div>
+                        {subtitle && (
+                            <p className="mt-1 text-sm text-muted-foreground">
+                                {subtitle}
+                            </p>
                         )}
+                    </div>
+                </div>
+
+                <div className="flex items-center justify-between gap-6 sm:justify-end">
+                    <p className="font-mono text-[10px] uppercase tracking-label text-muted-foreground">
+                        {period}
+                    </p>
+                </div>
+            </div>
+
+            {hasDetails && (
+                <div className="pl-0 sm:pl-14">
+                    <div className="max-w-3xl pt-6 text-sm leading-relaxed text-muted-foreground">
+                        {description && <p>{description}</p>}
                         {bullets && bullets.length > 0 && (
-                            <ul className="list-disc space-y-2 ml-4 pb-2">
-                                {bullets.map((bullet, index) => (
+                            <ul className="mt-5 space-y-3">
+                                {bullets.map((bullet) => (
                                     <li
-                                        key={index}
-                                        className="text-muted-foreground pl-1"
+                                        key={bullet}
+                                        className="grid grid-cols-[auto_1fr] gap-3"
                                     >
-                                        {bullet}
+                                        <span
+                                            aria-hidden
+                                            className="mt-[0.7em] size-1 rounded-full bg-brand-solid"
+                                        />
+                                        <span>{bullet}</span>
                                     </li>
                                 ))}
                             </ul>
                         )}
-                    </motion.div>
-                )}
-            </div>
-        </Card>
+                    </div>
+                </div>
+            )}
+        </article>
     );
-
-    if (!href) {
-        return <div className="block">{mainCard}</div>;
-    }
-
-    return (
-        <Link
-            href={href}
-            className="block cursor-pointer"
-            onClick={handleClick}
-        >
-            {mainCard}
-        </Link>
-    );
-};
+}

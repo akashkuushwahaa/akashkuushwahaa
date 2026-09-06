@@ -1,5 +1,4 @@
 import { Icons } from "@/components/icons";
-import { FolderIcon, HomeIcon } from "lucide-react";
 
 export const DATA = {
     name: "Akash Kushwaha",
@@ -10,6 +9,42 @@ export const DATA = {
     description: "Full-stack engineer • LLM tooling in TypeScript and Python",
     summary:
         "I build full-stack web applications and LLM-powered tools, mostly in TypeScript and Python.\n\nThe work I care about sits where a product meets a model. It is easy to get a language model to produce something that looks correct. Getting it to produce something correct enough to put in front of a user, repeatedly, is a different problem, and it turns out to be an engineering problem more than a prompting one: retrieval, evaluation, guardrails, and knowing when to keep a human in the loop.\n\nThat is what the [Code Review Agent](/projects/code-review-agent) taught me. It started at 0.82 F1 on a labeled set and reached 0.914. Nothing about the prompt changed; the retrieval did. I only knew that because I had built the labeled set first.\n\nBefore that I spent three months as an SDE intern at [CultureX](https://www.culturex.ai), shipping full-stack dashboard features on a weekly release cycle — the Next.js API routes behind them and the React interfaces on top. I am finishing a B.Tech in Computer Science & Engineering (AI & ML) at SAL Institute of Technology, expected 2027, and I am currently open to work.",
+    hero: {
+        role: "Full-stack engineer",
+        focus: "LLM tooling in TypeScript and Python",
+        headlineBefore: "I make language models ",
+        headlineAccent: "behave",
+        headlineAfter: " in production.",
+        sub: "Retrieval, evaluation and guardrails — the engineering between a demo that looks right and a product that is right.",
+    },
+    cta: {
+        title: "Have something that needs to work, not just demo?",
+        body: "I am looking for engineering work on products that put a model in front of real users.",
+        action: "Email me",
+    },
+    credentials: [
+        "Full-stack development and LLM tooling",
+        "Weekly production releases at CultureX",
+        "LLM evaluation with labeled test cases",
+    ],
+    principles: [
+        {
+            title: "Build the labeled set first",
+            body: "I built a labeled test set before tuning the Code Review Agent. It gave me a baseline to check whether each change improved the results.",
+        },
+        {
+            title: "Change what the model sees",
+            body: "Adding cross-file context improved the Code Review Agent’s F1 from 0.82 to 0.914 on the same test set. The prompt stayed the same.",
+        },
+        {
+            title: "Type the boundary",
+            body: "At CultureX, I used Zod to validate API data and Zustand to manage shared state. Together, those changes reduced runtime UI errors by 25%.",
+        },
+        {
+            title: "Ship weekly, review both ways",
+            body: "Weekly releases kept feedback close to the work. Reviewing teammates’ pull requests helped me improve how I structure my own components.",
+        },
+    ],
     resumeUrl: "/resume",
     resumeFile: "/resume.pdf",
     skills: {
@@ -51,9 +86,23 @@ export const DATA = {
             "Claude Code",
         ],
     } as Record<string, string[]>,
-    navbar: [
-        { href: "/", icon: HomeIcon, label: "Home" },
-        { href: "/projects", icon: FolderIcon, label: "Projects" },
+    // A curated subset for the fanned pile; the full grouped list stays in
+    // `skills` for the resume and case studies.
+    skillPile: [
+        "TypeScript",
+        "Python",
+        "RAG",
+        "Next.js",
+        "Evaluation sets",
+        "React",
+        "FastAPI",
+        "Guardrails",
+        "PostgreSQL",
+        "Docker",
+        "Zod",
+        "OpenAI API",
+        "GitHub Actions",
+        "Chroma",
     ],
     contact: {
         email: "akashkuushwahaa@gmail.com",
@@ -129,6 +178,8 @@ export const DATA = {
             title: "Code Review Agent",
             href: "/projects/code-review-agent",
             dates: "Solo build",
+            outcome:
+                "Retrieval changes, not prompt changes, moved F1 by nine points",
             featured: true,
             description:
                 "A pull-request reviewer scoped to security. It reads every diff, flags hardcoded secrets and SQL or command injection, and posts line-anchored comments through GitHub Actions.",
@@ -165,6 +216,8 @@ export const DATA = {
             title: "Job Pilot",
             href: "/projects/job-pilot",
             dates: "Solo build",
+            outcome:
+                "From a live job posting to a tailored resume PDF, unattended",
             featured: true,
             description:
                 "An agentic job-search platform. It sources live postings, researches each company with a headless browser, scores the match against your parsed resume, and generates a role-specific resume PDF.",
@@ -197,6 +250,8 @@ export const DATA = {
             title: "Enterprise Subscription Management API",
             href: "/projects/subscription-tracker",
             dates: "Solo build",
+            outcome:
+                "The whole subscription lifecycle, rate-limited at the edge",
             featured: true,
             description:
                 "A REST API covering the full subscription lifecycle: JWT auth, role-scoped routes, edge rate limiting and bot detection, and renewal reminders that run on a schedule rather than on request traffic.",
@@ -220,6 +275,7 @@ export const DATA = {
             title: "Job Application Assistant",
             href: "/projects/job-application-assistant",
             dates: "Solo build",
+            outcome: "Twenty-five minutes of tailoring down to under one",
             featured: false,
             description:
                 "A four-stage LLM pipeline that matches a resume to a job post, names the gaps, drafts the cover letter, and rewrites the resume — with every claim bound to facts in the parsed resume.",
@@ -247,6 +303,7 @@ export const DATA = {
         title: string;
         href: string;
         dates: string;
+        outcome: string;
         featured: boolean;
         description: string;
         metric: { label: string; from: string; to: string } | null;

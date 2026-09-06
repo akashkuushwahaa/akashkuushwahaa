@@ -1,4 +1,7 @@
-import Navbar from "@/components/navbar";
+import { GrainCanvas } from "@/components/grain-canvas";
+import { PageTransition } from "@/components/page-transition";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteNav } from "@/components/site-nav";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -49,21 +52,27 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body
                 className={cn(
-                    "mx-auto min-h-screen max-w-2xl bg-background px-6 py-12 font-sans antialiased sm:py-24",
+                    "min-h-screen bg-background font-sans antialiased",
                     GeistSans.variable,
                     GeistMono.variable
                 )}
             >
                 <ThemeProvider attribute="class" defaultTheme="dark">
                     <TooltipProvider delayDuration={0}>
+                        <GrainCanvas />
                         <a
                             href="#main"
-                            className="sr-only rounded-md px-3 py-2 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-foreground focus:text-background"
+                            className="sr-only rounded-md px-3 py-2 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-foreground focus:text-background"
                         >
                             Skip to content
                         </a>
-                        {children}
-                        <Navbar />
+                        <SiteNav />
+                        <div className="relative z-10 flex min-h-screen flex-col">
+                            <div className="flex-1 px-6 pb-12 pt-12 sm:pb-24 sm:pt-28">
+                                <PageTransition>{children}</PageTransition>
+                            </div>
+                            <SiteFooter />
+                        </div>
                     </TooltipProvider>
                 </ThemeProvider>
             </body>

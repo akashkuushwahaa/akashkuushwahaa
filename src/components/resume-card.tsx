@@ -1,13 +1,6 @@
-"use client";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { ChevronRightIcon } from "lucide-react";
+import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 interface ResumeCardProps {
     logoUrl: string;
@@ -19,7 +12,8 @@ interface ResumeCardProps {
     period: string;
     description?: string;
 }
-export const ResumeCard = ({
+
+export function ResumeCard({
     logoUrl,
     altText,
     title,
@@ -28,101 +22,73 @@ export const ResumeCard = ({
     badges,
     period,
     description,
-}: ResumeCardProps) => {
-    const [isExpanded, setIsExpanded] = React.useState(false);
-
-    const handleClick = (
-        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-    ) => {
-        if (description) {
-            e.preventDefault();
-            setIsExpanded(!isExpanded);
-        }
-    };
-
-    const mainCard = (
-        <Card className="flex shadow-card">
-            <div className="flex-none">
-                <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
-                    {logoUrl && (
-                        <AvatarImage
-                            src={logoUrl}
-                            alt={altText}
-                            className="object-contain"
-                        />
-                    )}
-                    <AvatarFallback className="bg-transparent font-mono text-sm dark:text-background">
-                        {altText[0]}
-                    </AvatarFallback>
-                </Avatar>
-            </div>
-            <div className="flex-grow ml-4 items-center flex-col group">
-                <CardHeader>
-                    <div className="flex items-center justify-between gap-x-2 text-base">
-                        <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
-                            {title}
-                            {badges && (
-                                <span className="inline-flex gap-x-1">
-                                    {badges.map((badge, index) => (
-                                        <Badge
-                                            variant="secondary"
-                                            className="align-middle text-xs"
-                                            key={index}
-                                        >
-                                            {badge}
-                                        </Badge>
-                                    ))}
-                                </span>
-                            )}
-                            {href && (
-                                <ChevronRightIcon
-                                    className={cn(
-                                        "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
-                                        isExpanded ? "rotate-90" : "rotate-0"
-                                    )}
-                                />
-                            )}
-                        </h3>
-                        <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
-                            {period}
-                        </div>
-                    </div>
-                    {subtitle && (
-                        <div className="font-sans text-xs">{subtitle}</div>
-                    )}
-                </CardHeader>
-                {description && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{
-                            opacity: isExpanded ? 1 : 0,
-
-                            height: isExpanded ? "auto" : 0,
-                        }}
-                        transition={{
-                            duration: 0.7,
-                            ease: [0.16, 1, 0.3, 1],
-                        }}
-                        className="mt-2 text-xs sm:text-sm"
-                    >
-                        {description}
-                    </motion.div>
-                )}
-            </div>
-        </Card>
+}: ResumeCardProps) {
+    const heading = (
+        <span className="inline-flex items-center gap-1.5 text-lg font-medium tracking-ui">
+            {title}
+            {href && (
+                <ArrowUpRightIcon className="size-3.5 text-muted-foreground transition-transform duration-medium ease-out-expo group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 motion-reduce:transition-none" />
+            )}
+        </span>
     );
-
-    if (!href) {
-        return <div className="block">{mainCard}</div>;
-    }
 
     return (
-        <Link
-            href={href}
-            className="block cursor-pointer"
-            onClick={handleClick}
-        >
-            {mainCard}
-        </Link>
+        <article className="py-6 sm:py-8">
+            <div className="grid gap-5 sm:grid-cols-[1fr_auto] sm:items-start">
+                <div className="flex min-w-0 items-start gap-4">
+                    <Avatar className="size-10 shrink-0 border border-border bg-background">
+                        {logoUrl && (
+                            <AvatarImage
+                                src={logoUrl}
+                                alt={altText}
+                                className="object-contain"
+                            />
+                        )}
+                        <AvatarFallback className="bg-muted text-xs">
+                            {altText[0]}
+                        </AvatarFallback>
+                    </Avatar>
+
+                    <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            {href ? (
+                                <Link
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group/link transition-colors duration-base hover:text-brand"
+                                >
+                                    {heading}
+                                </Link>
+                            ) : (
+                                <h3>{heading}</h3>
+                            )}
+                            {badges?.map((badge) => (
+                                <span
+                                    key={badge}
+                                    className="font-mono text-[9px] uppercase tracking-label text-brand"
+                                >
+                                    {badge}
+                                </span>
+                            ))}
+                        </div>
+                        {subtitle && (
+                            <p className="mt-1 text-sm text-muted-foreground">
+                                {subtitle}
+                            </p>
+                        )}
+                        {description && (
+                            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                                {description}
+                            </p>
+                        )}
+                    </div>
+                </div>
+
+                <p className="pl-14 font-mono text-[10px] uppercase tracking-label text-muted-foreground sm:pl-0 sm:text-right">
+                    {period}
+                </p>
+            </div>
+        </article>
     );
-};
+}

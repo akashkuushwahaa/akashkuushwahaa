@@ -2,67 +2,157 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Two 12-step ramps, one per theme, then a single alias map that reads the same
+   in both. Step roles follow Radix: 1-2 page backgrounds, 3-5 component fills,
+   6-8 borders, 9-10 solid, 11-12 text. Because the roles line up, the semantic
+   layer below is written once instead of twice. */
 @layer base {
     :root {
-        --background: 0 0% 98%;
-        --foreground: 210 11.1% 3.53%;
+        --n-1: 0 0% 99%;
+        --n-2: 0 0% 97%;
+        --n-3: 0 0% 94%;
+        --n-4: 0 0% 91%;
+        --n-5: 0 0% 88%;
+        --n-6: 0 0% 84%;
+        --n-7: 0 0% 78%;
+        --n-8: 0 0% 68%;
+        --n-9: 0 0% 55%;
+        --n-10: 0 0% 44%;
+        --n-11: 0 0% 35%;
+        --n-12: 0 0% 12%;
 
-        --card: 0 0% 100%;
-        --card-foreground: 210 11.1% 3.53%;
+        --y-1: 52 100% 97%;
+        --y-2: 52 100% 94%;
+        --y-3: 51 100% 89%;
+        --y-4: 51 100% 84%;
+        --y-5: 51 100% 79%;
+        --y-6: 51 100% 70%;
+        --y-7: 51 100% 60%;
+        --y-8: 51 100% 52%;
+        --y-9: 51 100% 43%;
+        --y-10: 51 100% 36%;
+        --y-11: 50 100% 22%;
+        --y-12: 50 96% 14%;
 
-        --popover: 0 0% 100%;
-        --popover-foreground: 210 11.1% 3.53%;
+        --v-1: 258 100% 98%;
+        --v-2: 258 100% 96%;
+        --v-3: 258 100% 92%;
+        --v-4: 258 100% 88%;
+        --v-5: 258 100% 83%;
+        --v-6: 258 95% 74%;
+        --v-7: 258 90% 64%;
+        --v-8: 258 85% 55%;
+        --v-9: 258 85% 46%;
+        --v-10: 258 85% 39%;
+        --v-11: 258 80% 30%;
+        --v-12: 258 60% 16%;
 
-        --primary: 0 0% 9%;
-        --primary-foreground: 0 0% 98%;
+        --green: 145 70% 24%;
+        --blue: 205 90% 30%;
 
-        --secondary: 0 0% 96.1%;
-        --secondary-foreground: 0 0% 9%;
-
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
-
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
-
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 0 0% 98%;
-
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
-        --ring: 0 0% 3.9%;
-
-        --radius: 0.5rem;
+        --grain-opacity: 0.015;
     }
 
     .dark {
-        --background: 210 11.1% 3.53%;
-        --foreground: 0 0% 98%;
+        --green: 140 78% 91%;
+        --blue: 203 100% 92%;
+        --n-1: 0 0% 8%;
+        --n-2: 0 0% 11%;
+        --n-3: 0 0% 14%;
+        --n-4: 0 0% 18%;
+        --n-5: 0 0% 22%;
+        --n-6: 0 0% 28%;
+        --n-7: 0 0% 35%;
+        --n-8: 0 0% 44%;
+        --n-9: 0 0% 54%;
+        --n-10: 0 0% 65%;
+        --n-11: 0 0% 76%;
+        --n-12: 0 0% 87%;
 
-        --card: 210 11.1% 3.53%;
-        --card-foreground: 0 0% 98%;
+        --y-1: 52 92% 5%;
+        --y-2: 50 96% 10%;
+        --y-3: 50 100% 16%;
+        --y-4: 51 100% 24%;
+        --y-5: 51 100% 33%;
+        --y-6: 51 100% 43%;
+        --y-7: 51 100% 55%;
+        --y-8: 51 100% 67%;
+        --y-9: 51 100% 79%;
+        --y-10: 51 100% 84%;
+        --y-11: 51 100% 89%;
+        --y-12: 52 100% 94%;
 
-        --popover: 210 11.1% 3.53%;
-        --popover-foreground: 0 0% 98%;
+        --v-1: 258 38% 5%;
+        --v-2: 259 46% 8%;
+        --v-3: 259 51% 12%;
+        --v-4: 258 54% 17%;
+        --v-5: 257 64% 23%;
+        --v-6: 258 75% 31%;
+        --v-7: 258 85% 42%;
+        --v-8: 258 95% 68%;
+        --v-9: 258 100% 83%;
+        --v-10: 258 100% 88%;
+        --v-11: 258 100% 92%;
+        --v-12: 258 100% 96%;
 
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
+        --grain-opacity: 0.018;
+    }
 
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
+    :root {
+        --background: var(--n-1);
+        --foreground: var(--n-12);
 
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
+        --card: var(--n-2);
+        --card-foreground: var(--n-12);
 
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
+        --popover: var(--n-2);
+        --popover-foreground: var(--n-12);
 
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
+        --primary: var(--n-12);
+        --primary-foreground: var(--n-1);
 
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
+        --secondary: var(--n-3);
+        --secondary-foreground: var(--n-12);
+
+        --muted: var(--n-3);
+        --muted-foreground: var(--n-11);
+
+        --accent: var(--n-3);
+        --accent-foreground: var(--n-12);
+
+        --brand: var(--y-11);
+        --brand-solid: var(--y-9);
+        --brand-foreground: var(--y-12);
+        --brand-subtle: var(--y-3);
+
+        --violet: var(--v-11);
+        --violet-solid: var(--v-9);
+        --violet-foreground: var(--v-12);
+        --violet-subtle: var(--v-3);
+
+        /* Solid fills need a pale ground with dark ink in BOTH themes, so these
+           two do not flip with the ramps the way everything above does. */
+        --brand-pop: 51 100% 79%;
+        --brand-pop-ink: 50 96% 10%;
+        --violet-pop: 258 100% 83%;
+        --violet-pop-ink: 258 38% 5%;
+
+        --destructive: 0 72% 51%;
+        --destructive-foreground: var(--n-1);
+
+        --border: var(--n-6);
+        --input: var(--n-6);
+        --ring: var(--n-8);
+
+        --radius: 0.75rem;
+
+        --duration-fast: 150ms;
+        --duration-base: 200ms;
+        --duration-medium: 300ms;
+        --duration-slow: 500ms;
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-in-out-strong: cubic-bezier(0.76, 0, 0.24, 1);
+        --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 }
 
@@ -152,6 +242,10 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
     overflow-wrap: anywhere;
 }
 
+.prose hr {
+    display: none;
+}
+
 /* Typography ships its own blue-tinted palette and a gray-900 code surface.
    Bind both to the site tokens so the write-ups match the rest of the site in
    either theme. */
@@ -172,4 +266,346 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
     --tw-prose-pre-bg: hsl(var(--muted));
     --tw-prose-th-borders: hsl(var(--border));
     --tw-prose-td-borders: hsl(var(--border));
+}
+
+.grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    opacity: var(--grain-opacity);
+}
+
+/* Duplicated content scrolled by half its width; the mask dissolves both edges
+   so items enter and leave instead of being clipped. */
+.marquee-mask {
+    mask-image: linear-gradient(
+        90deg,
+        transparent 0,
+        #000 12%,
+        #000 88%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0,
+        #000 12%,
+        #000 88%,
+        transparent 100%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none !important;
+        transform: none !important;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Anchor targets have to clear the fixed nav, or a table-of-contents jump
+   lands with the heading hidden underneath it. */
+.prose :is(h2, h3) {
+    scroll-margin-top: 7rem;
+}
+
+.js-reveal .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity var(--duration-slow) var(--ease-out-expo),
+        transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.js-reveal .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .animate-label-in {
+        animation: none !important;
+    }
+    .js-reveal .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .marquee-mask {
+        mask-image: none;
+        -webkit-mask-image: none;
+    }
+    .marquee-track {
+        width: 100%;
+    }
+    .marquee-group {
+        flex-wrap: wrap;
+        gap: 1rem;
+        width: 100%;
+    }
+    .marquee-item {
+        width: 100%;
+    }
+    .marquee-label {
+        white-space: normal;
+        padding: 0;
+    }
+    .marquee-separator,
+    .marquee-group[aria-hidden="true"] {
+        display: none;
+    }
+}
+
+/* The work cards swap the pointer for a "Read" pill, but only where a real
+   pointer exists — touch and coarse pointers keep the default behaviour. */
+@media (hover: hover) and (pointer: fine) {
+    .work-outcome {
+        opacity: 0;
+        transition: opacity 250ms var(--ease-out-expo);
+    }
+
+    .work-card[data-preview-active="true"] .work-outcome,
+    .work-card:focus-within .work-outcome {
+        opacity: 1;
+    }
+
+    .work-cursor-area,
+    .work-cursor-area a {
+        cursor: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .work-outcome {
+        transition: none;
+    }
+}
+
+/* The principles stack relies on each item pinning over the one before it.
+   Without motion that reads as content vanishing, so it collapses to a plain
+   list instead. */
+@media (prefers-reduced-motion: reduce) {
+    .principle-item {
+        position: static !important;
+        padding-bottom: 5rem !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Route transition: a panel rises from below to cover the outgoing page, then
+   keeps travelling up to uncover the incoming one. */
+.page-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: #000;
+    pointer-events: none;
+    transform: translateY(100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-curtain {
+        display: none;
+    }
+}
+
+.text-word-clip {
+    display: inline-block;
+    vertical-align: baseline;
+    padding-block: 0.12em;
+    margin-block: -0.12em;
+    overflow: clip;
+}
+
+.text-word-inner {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+.animated-text[data-motion="ready"]:not([data-visible="true"])
+    .text-word-inner {
+    transform: translateY(120%);
+}
+
+.animated-text[data-visible="true"] .text-word-inner {
+    transform: none;
+    transition: transform 700ms var(--ease-out-expo) var(--word-delay, 0ms);
+}
+
+.animated-text[data-visible="true"] .text-word-clip:has(.particle-text) {
+    overflow: visible;
+}
+
+.nav-link:focus-visible .nav-link-label {
+    transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animated-text .text-word-inner {
+        transform: none !important;
+        transition: none !important;
+    }
+    .nav-link:focus-visible .nav-link-label {
+        transform: none;
+    }
+    [data-principle-char] {
+        opacity: 1 !important;
+    }
+}
+
+/* Reduced motion gets the labels as a plain wrapped cluster instead of a
+   simulated pile. */
+.skill-scene[data-static] > div[aria-hidden] {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 0.75rem;
+    height: 100%;
+    padding: 2rem;
+}
+
+.hero-heading {
+    font-size: clamp(3rem, 6.12vw, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+}
+
+:where(a, button, summary):focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 5px;
+}
+
+section[id] {
+    scroll-margin-top: 7rem;
+}
+
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.nav-link-window {
+    display: block;
+    overflow: hidden;
+}
+.nav-link-label {
+    position: relative;
+    display: block;
+    transition: transform var(--duration-medium) var(--ease-out-expo);
+}
+.nav-link-label::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: 100%;
+}
+.nav-link:hover .nav-link-label {
+    transform: translateY(-100%);
+}
+.mobile-nav summary::-webkit-details-marker {
+    display: none;
+}
+.mobile-nav[open] .mobile-nav-chevron {
+    transform: rotate(180deg);
+}
+.mobile-nav-panel {
+    position: absolute;
+    inset: auto -1px calc(100% + 0.75rem);
+    padding: 1rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: 1.5rem;
+    background: hsl(var(--card));
+    max-height: calc(100svh - 7rem);
+    overflow-y: auto;
+}
+
+.profile-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.75rem, 3.5vw, 3rem);
+    border-radius: 1rem;
+}
+.profile-panel-violet {
+    background: hsl(var(--violet-pop));
+    color: hsl(var(--violet-pop-ink));
+}
+.profile-panel-yellow {
+    background: hsl(var(--brand-pop));
+    color: hsl(var(--brand-pop-ink));
+}
+.profile-panel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: auto;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    transition: gap var(--duration-medium) var(--ease-out-expo);
+}
+.profile-panel-link:hover {
+    gap: 2rem;
+}
+.profile-panel-link:focus-visible {
+    outline-color: currentColor;
+}
+
+.project-stage {
+    background: hsl(var(--muted));
+}
+.project-stage[data-project="code-review-agent"] {
+    background: color-mix(
+        in srgb,
+        hsl(var(--violet-pop)) 15%,
+        hsl(var(--muted))
+    );
+}
+.project-stage[data-project="subscription-tracker"] {
+    background: color-mix(in srgb, hsl(var(--blue)) 14%, hsl(var(--muted)));
+}
+
+.particle-text[data-ready="true"] > .particle-source {
+    opacity: 0;
+}
+
+@media (max-width: 639px) {
+    .site-header {
+        top: auto;
+        bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+    .principle-item {
+        position: static !important;
+        padding-bottom: 4rem !important;
+        opacity: 1 !important;
+    }
+    .principle-item:last-child {
+        padding-bottom: 0 !important;
+    }
+    .skill-scene[data-static] > div[aria-hidden] {
+        align-content: end;
+        padding: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-link:hover .nav-link-label {
+        transform: none;
+    }
+    .nav-link-label,
+    .profile-panel-link {
+        transition: none;
+    }
+    .particle-text > .particle-source {
+        opacity: 1 !important;
+    }
+    .particle-text > canvas {
+        display: none;
+    }
 }

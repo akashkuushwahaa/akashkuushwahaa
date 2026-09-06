@@ -7,24 +7,21 @@ interface MetricProps {
     className?: string;
 }
 
+// The before/after ledger. It appears only where a number was actually
+// measured — on every card it would be decoration, on two it is a claim.
 export function Metric({ label, from, to, className }: MetricProps) {
     return (
-        <div
-            className={cn(
-                "flex flex-col gap-y-1 border-t border-border pt-2 font-mono",
-                className
-            )}
-        >
-            <span className="text-[10px] uppercase tracking-normal text-muted-foreground">
+        <div className={cn("rounded-2xl border border-border p-6", className)}>
+            <p className="font-mono text-[10px] uppercase tracking-label text-muted-foreground">
                 {label}
-            </span>
-            <span className="flex items-baseline gap-x-2 text-xs tabular-nums">
+            </p>
+            <p className="mt-3 flex flex-wrap items-baseline gap-3 font-mono text-2xl tabular-nums">
                 <span className="text-muted-foreground">{from}</span>
                 <span aria-hidden className="text-muted-foreground">
                     &rarr;
                 </span>
-                <span className="font-medium text-foreground">{to}</span>
-            </span>
+                <span className="text-brand">{to}</span>
+            </p>
         </div>
     );
 }

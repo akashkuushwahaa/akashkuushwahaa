@@ -23,7 +23,8 @@ Two things in one place:
 ## Architecture
 
 **Stack:** Next.js 15 (App Router), React 19, TypeScript 5, Tailwind CSS 3,
-shadcn/ui, MagicUI, Framer Motion.
+shadcn/ui, MagicUI, Framer Motion, matter-js (the About page pile only,
+loaded on demand).
 
 **Two content sources, and they do different jobs.**
 
@@ -44,10 +45,24 @@ matching the markdown filename, or the card links nowhere.
 | Route | Source |
 |---|---|
 | `/` | `src/data/resume.tsx` |
+| `/about` | `content/about.md`, plus `DATA.skillPile` for the physics pile |
 | `/projects` | `content/projects/*.md` frontmatter |
 | `/projects/[slug]` | `content/projects/<slug>.md` |
 | `/work/[slug]` | `content/work/<slug>.md` |
 | `/resume` | embeds `public/resume.pdf`, compiled from `resume/main.tex` |
+
+Navigation is intercepted by `page-transition.tsx` so the curtain can play
+before the route changes. If you add a link that must bypass it (a file
+download, a new tab, an external host), the existing guards already cover those
+cases — check them before adding a special case.
+
+Chrome is in the root layout: a loading screen, the grain canvas, a fixed top
+nav (`site-nav.tsx`) and a footer (`site-footer.tsx`). The layout supplies
+padding only — each page sets its own `max-w-content`, so do not put a container
+back on `<body>`.
+
+Static assets belong in `public/`, not `content/` — `content/` is parsed as
+markdown and is not served.
 
 All are statically generated at build time.
 

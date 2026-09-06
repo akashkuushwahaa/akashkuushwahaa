@@ -44,6 +44,17 @@ export default async function ProjectCaseStudy(props: {
         notFound();
     }
 
+    const studies = await getCaseStudies();
+    const index = studies.findIndex((entry) => entry.slug === slug);
+    const following = studies[(index + 1) % studies.length];
+    const next =
+        following && following.slug !== slug
+            ? {
+                  href: `/projects/${following.slug}`,
+                  title: following.metadata.title,
+              }
+            : undefined;
+
     return (
         <>
             <script
@@ -63,7 +74,11 @@ export default async function ProjectCaseStudy(props: {
             <CaseStudy
                 doc={study}
                 backHref="/projects"
-                backLabel="All projects"
+                backLabel="All work"
+                metric={
+                    DATA.projects.find((entry) => entry.slug === slug)?.metric
+                }
+                next={next}
             />
         </>
     );

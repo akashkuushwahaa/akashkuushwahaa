@@ -35,3 +35,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local reference captures of the site being studied, not site content
+/Elements/
+
+# impeccable skill critique notes, local tooling output
+/.impeccable/

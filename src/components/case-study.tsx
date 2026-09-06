@@ -1,5 +1,10 @@
-import { Icons } from "@/components/icons";
-import { Badge } from "@/components/ui/badge";
+import { Metric } from "@/components/metric";
+import { AnimatedText } from "@/components/animated-text";
+import { ProjectVisual } from "@/components/project-visual";
+import { ScrollReveal } from "@/components/scroll-reveal";
+import { SmartButton } from "@/components/smart-button";
+import { TableOfContents } from "@/components/table-of-contents";
+import { TagList } from "@/components/tag-list";
 import type { Doc } from "@/data/content";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
@@ -8,86 +13,134 @@ interface Props {
     doc: Doc;
     backHref: string;
     backLabel: string;
+    metric?: { label: string; from: string; to: string } | null;
+    next?: { href: string; title: string };
 }
 
-export function CaseStudy({ doc, backHref, backLabel }: Props) {
+function Fact({
+    label,
+    children,
+}: {
+    label: string;
+    children: React.ReactNode;
+}) {
+    return (
+        <div className="flex flex-col gap-y-2">
+            <dt className="font-mono text-[10px] uppercase tracking-label text-muted-foreground">
+                {label}
+            </dt>
+            <dd className="text-sm">{children}</dd>
+        </div>
+    );
+}
+
+export function CaseStudy({ doc, backHref, backLabel, metric, next }: Props) {
     const { title, summary, tags, repo, live, role, company, period } =
         doc.metadata;
-    const eyebrow = [company, period, role].filter(Boolean).join(" · ");
 
     return (
-        <main id="main" className="flex min-h-[100dvh] flex-col">
-            <Link
-                href={backHref}
-                className="font-mono text-[11px] uppercase text-muted-foreground hover:text-foreground"
-            >
-                &larr; {backLabel}
-            </Link>
+        <main id="main" className="mx-auto max-w-content">
+            <div className="pt-10">
+                <Link
+                    href={backHref}
+                    className="font-mono text-[10px] uppercase tracking-label text-muted-foreground hover:text-foreground"
+                >
+                    &larr; {backLabel}
+                </Link>
+            </div>
 
-            <header className="mt-6 flex flex-col gap-y-3">
-                <h1 className="text-3xl font-semibold tracking-display sm:text-4xl">
-                    {title}
-                </h1>
-                <p className="text-pretty text-sm text-muted-foreground">
-                    {summary}
-                </p>
-                {eyebrow && (
-                    <span className="font-mono text-[10px] uppercase text-muted-foreground">
-                        {eyebrow}
-                    </span>
-                )}
-                {tags && tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                        {tags.map((tag) => (
-                            <Badge
-                                key={tag}
-                                variant="secondary"
-                                className="px-1 py-0 text-[10px]"
-                            >
-                                {tag}
-                            </Badge>
-                        ))}
-                    </div>
-                )}
-                {(repo || live) && (
-                    <div className="flex flex-wrap gap-1 pt-1">
+            <ScrollReveal className="mt-10">
+                <ProjectVisual slug={doc.slug} interactive />
+            </ScrollReveal>
+
+            <ScrollReveal className="mt-14 grid gap-8 lg:grid-cols-2 lg:gap-20">
+                <div className="flex flex-col gap-4">
+                    <h1 className="text-display font-semibold">
+                        <AnimatedText>{title}</AnimatedText>
+                    </h1>
+                    <p className="text-pretty text-lg text-muted-foreground">
+                        {summary}
+                    </p>
+                </div>
+                <div className="flex flex-col gap-4">
+                    {metric && (
+                        <Metric
+                            label={metric.label}
+                            from={metric.from}
+                            to={metric.to}
+                        />
+                    )}
+                    <div className="flex flex-wrap gap-2">
                         {live && (
-                            <Link href={live} target="_blank">
-                                <Badge className="flex gap-2 px-2 py-1 text-[10px]">
-                                    <Icons.globe className="size-3" />
-                                    Live
-                                </Badge>
-                            </Link>
+                            <SmartButton href={live} tone="brand" external>
+                                Live
+                            </SmartButton>
                         )}
                         {repo && (
-                            <Link href={repo} target="_blank">
-                                <Badge className="flex gap-2 px-2 py-1 text-[10px]">
-                                    <Icons.github className="size-3" />
-                                    Source
-                                </Badge>
-                            </Link>
+                            <SmartButton href={repo} external>
+                                Source
+                            </SmartButton>
                         )}
                     </div>
-                )}
-            </header>
+                </div>
+            </ScrollReveal>
 
-            <article
-                className="prose prose-sm mt-10 max-w-full text-pretty font-sans prose-headings:font-semibold prose-headings:tracking-ui prose-a:text-foreground prose-a:underline-offset-4 prose-pre:text-xs dark:prose-invert"
-                dangerouslySetInnerHTML={{ __html: doc.source }}
-            />
+            <ScrollReveal className="mt-16 pt-10">
+                <dl className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+                    {company && <Fact label="Context">{company}</Fact>}
+                    {role && <Fact label="Role">{role}</Fact>}
+                    {period && <Fact label="Period">{period}</Fact>}
+                    {tags && tags.length > 0 && (
+                        <div className="col-span-2 flex flex-col gap-y-2 lg:col-span-1">
+                            <dt className="font-mono text-[10px] uppercase tracking-label text-muted-foreground">
+                                Stack
+                            </dt>
+                            <dd>
+                                <TagList tags={tags} />
+                            </dd>
+                        </div>
+                    )}
+                </dl>
+            </ScrollReveal>
 
-            <footer className="mt-16 border-t border-border pt-6">
-                <p className="text-sm text-muted-foreground">
-                    Questions about how this was built?{" "}
+            <div className="mt-20 gap-16 lg:grid lg:grid-cols-[180px_minmax(0,1fr)] lg:items-start">
+                <div className="hidden lg:block">
+                    <TableOfContents headings={doc.headings} />
+                </div>
+                <article
+                    className="prose prose-sm max-w-2xl text-pretty font-sans prose-headings:font-semibold prose-headings:tracking-ui prose-a:text-foreground prose-a:underline-offset-4 prose-pre:text-xs dark:prose-invert"
+                    dangerouslySetInnerHTML={{ __html: doc.source }}
+                />
+            </div>
+
+            <ScrollReveal className="mt-24 pb-24 pt-10">
+                {next ? (
                     <Link
-                        href={`mailto:${DATA.contact.email}`}
-                        className="text-foreground underline underline-offset-4"
+                        href={next.href}
+                        className="group flex flex-col gap-2"
                     >
-                        Email me
+                        <span className="font-mono text-[10px] uppercase tracking-label text-muted-foreground">
+                            Next
+                        </span>
+                        <span className="text-display-sm font-semibold transition-colors duration-base group-hover:text-brand">
+                            {next.title}
+                        </span>
                     </Link>
-                    .
-                </p>
-            </footer>
+                ) : (
+                    <div className="flex flex-col gap-4">
+                        <span className="font-mono text-[10px] uppercase tracking-label text-muted-foreground">
+                            Contact
+                        </span>
+                        <SmartButton
+                            href={`mailto:${DATA.contact.email}`}
+                            tone="brand"
+                            className="self-start"
+                        >
+                            {DATA.cta.action}
+                        </SmartButton>
+                    </div>
+                )}
+            </ScrollReveal>
         </main>
     );
 }
