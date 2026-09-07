@@ -1,5 +1,6 @@
 import { ExperienceCard } from "@/components/experience-card";
 import { AnimatedText } from "@/components/animated-text";
+import { HoverTilt } from "@/components/hover-tilt";
 import { Marquee } from "@/components/marquee";
 import { PrinciplesStack } from "@/components/principles-stack";
 import { ResumeCard } from "@/components/resume-card";
@@ -91,7 +92,7 @@ export default function Page() {
 
             <section id="about" className="pb-32">
                 <ScrollReveal className="grid gap-5 sm:grid-cols-2 sm:gap-6">
-                    <div className="profile-panel profile-panel-violet">
+                    <HoverTilt className="profile-panel profile-panel-violet">
                         <span className="text-xs font-medium uppercase tracking-label">
                             About
                         </span>
@@ -106,8 +107,8 @@ export default function Page() {
                         <Link href="/about" className="profile-panel-link">
                             More about me <span aria-hidden>&#8599;</span>
                         </Link>
-                    </div>
-                    <div className="profile-panel profile-panel-yellow">
+                    </HoverTilt>
+                    <HoverTilt className="profile-panel profile-panel-yellow">
                         <span className="text-xs font-medium uppercase tracking-label">
                             Background
                         </span>
@@ -123,7 +124,7 @@ export default function Page() {
                         <Link href="/resume" className="profile-panel-link">
                             View resume <span aria-hidden>&#8599;</span>
                         </Link>
-                    </div>
+                    </HoverTilt>
                 </ScrollReveal>
             </section>
 

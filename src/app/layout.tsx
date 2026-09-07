@@ -1,4 +1,5 @@
 import { GrainCanvas } from "@/components/grain-canvas";
+import { LoadingScreen } from "@/components/loading-screen";
 import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
@@ -73,6 +74,7 @@ export default function RootLayout({
                             </div>
                             <SiteFooter />
                         </div>
+                        <LoadingScreen />
                     </TooltipProvider>
                 </ThemeProvider>
             </body>

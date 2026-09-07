@@ -11,8 +11,10 @@ interface Props {
     principles: readonly Principle[];
 }
 
-const STICKY_TOP = 240;
-const FADE_OVER = 420;
+const PIN_TOP = "clamp(6rem, 20vh, 14rem)";
+const ITEM_GAP = "min(38vh, 26rem)";
+const FADE_OVER = 220;
+const BODY_LEAD = 70;
 
 function ProgressText({ children }: { children: string }) {
     return (
@@ -76,9 +78,9 @@ export function PrinciplesStack({ principles }: Props) {
                     0,
                     Math.min(
                         1,
-                        (window.innerHeight * 0.9 -
+                        (window.innerHeight * 0.92 -
                             element.getBoundingClientRect().top) /
-                            (window.innerHeight * 0.35)
+                            (window.innerHeight * 0.28)
                     )
                 );
                 characters.forEach((character, index) => {
@@ -95,15 +97,28 @@ export function PrinciplesStack({ principles }: Props) {
                     );
                 });
             });
+            // The outgoing item is gone by the time its successor reaches its
+            // bottom edge, so the two never overlap; the body lets go first.
             items.forEach((item, index) => {
                 const next = items[index + 1];
+                const body = item.querySelector("p");
                 if (!next) {
                     item.style.opacity = "1";
+                    if (body) body.style.opacity = "1";
                     return;
                 }
-                const distance = next.getBoundingClientRect().top - STICKY_TOP;
-                const ratio = Math.max(0, Math.min(1, distance / FADE_OVER));
-                item.style.opacity = String(ratio);
+                // The item box carries the gap to its successor as padding,
+                // so the edge that matters is the bottom of the text.
+                const edge = (body ?? item).getBoundingClientRect().bottom;
+                const room = next.getBoundingClientRect().top - edge;
+                const clamp = (value: number) =>
+                    Math.max(0, Math.min(1, value));
+                item.style.opacity = String(clamp(room / FADE_OVER));
+                if (body) {
+                    body.style.opacity = String(
+                        clamp((room - BODY_LEAD) / FADE_OVER)
+                    );
+                }
             });
         };
 
@@ -131,18 +146,18 @@ export function PrinciplesStack({ principles }: Props) {
                     key={principle.title}
                     className="principle-item sticky"
                     style={{
-                        top: `${STICKY_TOP}px`,
+                        top: PIN_TOP,
                         paddingBottom:
-                            index === principles.length - 1 ? 0 : "62vh",
+                            index === principles.length - 1 ? 0 : ITEM_GAP,
                     }}
                 >
-                    <span className="font-mono text-sm tabular-nums tracking-label text-blue">
+                    <span className="font-mono text-xs tabular-nums tracking-label text-blue">
                         {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-8 max-w-[17ch] text-balance text-display font-medium">
+                    <h3 className="mt-4 max-w-[24ch] text-balance text-2xl font-medium tracking-ui sm:text-3xl">
                         <ProgressText>{principle.title}</ProgressText>
                     </h3>
-                    <p className="mt-8 max-w-[44ch] text-pretty text-xl leading-relaxed text-muted-foreground">
+                    <p className="mt-4 max-w-[52ch] text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
                         <ProgressText>{principle.body}</ProgressText>
                     </p>
                 </li>

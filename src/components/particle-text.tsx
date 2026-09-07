@@ -139,7 +139,11 @@ export function ParticleText({ children, className }: Props) {
             }
         };
 
+        // The loop only runs while something moves: the pointer is near the
+        // word or particles are still springing home. At rest it stops, so
+        // the hero does not burn a frame budget while the page scrolls.
         const tick = () => {
+            let energy = 0;
             for (const p of particles) {
                 if (pointer.active) {
                     const dx = p.x - pointer.x;
@@ -157,16 +161,31 @@ export function ParticleText({ children, className }: Props) {
                 p.vy = (p.vy + (p.homeY - p.y) * SPRING) * FRICTION;
                 p.x += p.vx;
                 p.y += p.vy;
+                energy = Math.max(
+                    energy,
+                    Math.abs(p.vx) + Math.abs(p.vy),
+                    Math.abs(p.homeX - p.x) + Math.abs(p.homeY - p.y)
+                );
             }
             draw();
-            raf = requestAnimationFrame(tick);
+            raf =
+                pointer.active || energy > 0.05
+                    ? requestAnimationFrame(tick)
+                    : 0;
         };
 
         const onMove = (event: PointerEvent) => {
             const box = canvas.getBoundingClientRect();
             pointer.x = event.clientX - box.left;
             pointer.y = event.clientY - box.top;
-            pointer.active = true;
+            pointer.active =
+                pointer.x > -REPEL_RADIUS &&
+                pointer.x < width + REPEL_RADIUS &&
+                pointer.y > -REPEL_RADIUS &&
+                pointer.y < height + REPEL_RADIUS;
+            if (pointer.active && !raf && visible && !disposed) {
+                raf = requestAnimationFrame(tick);
+            }
         };
 
         const onLeave = () => {

@@ -61,6 +61,14 @@ nav (`site-nav.tsx`) and a footer (`site-footer.tsx`). The layout supplies
 padding only — each page sets its own `max-w-content`, so do not put a container
 back on `<body>`.
 
+**Loading screen.** `loading-screen.tsx` is server-rendered already covering
+the page, and `page-transition.tsx` handwrites the name on it before the first
+reveal (route changes reuse the same panel without the signature). The strokes
+in `src/data/hello-signature.ts` are generated — run `npm run signature` after
+changing `DATA.name`, do not edit the file. Each pen stroke is its own
+`<path>` on purpose: browsers restart the dash pattern on every subpath, so a
+compound path cannot be revealed in order.
+
 Static assets belong in `public/`, not `content/` — `content/` is parsed as
 markdown and is not served.
 

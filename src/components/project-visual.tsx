@@ -1,6 +1,7 @@
 import { ProjectMedia } from "@/components/project-media";
 import { cn } from "@/lib/utils";
 import Image, { type StaticImageData } from "next/image";
+import { Children, type CSSProperties } from "react";
 import jobPilotShot from "../../public/job-pilot.png";
 import assistantShot from "../../public/job-application-assistant.png";
 
@@ -38,6 +39,23 @@ const SHOTS: Record<
     },
 };
 
+// The macOS title bar shared by every window on the site, so a screenshot and
+// a terminal read as two windows from the same desktop.
+function WindowBar({ title }: { title: string }) {
+    return (
+        <div className="terminal-bar relative flex items-center px-3.5 py-2.5">
+            <span className="flex gap-2" aria-hidden>
+                <span className="size-3 rounded-full bg-[#ff5f57]" />
+                <span className="size-3 rounded-full bg-[#febc2e]" />
+                <span className="size-3 rounded-full bg-[#28c840]" />
+            </span>
+            <span className="t-dim absolute inset-x-20 truncate text-center font-mono text-[11px] sm:text-xs">
+                {title}
+            </span>
+        </div>
+    );
+}
+
 function Chrome({
     label,
     bleed,
@@ -49,16 +67,7 @@ function Chrome({
 }) {
     return (
         <div className="project-window mx-auto w-full max-w-4xl overflow-hidden rounded-lg bg-card shadow-work transition-transform duration-slow ease-out-expo group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none">
-            <div className="flex items-center gap-2 px-3 py-2">
-                <span className="flex gap-1.5" aria-hidden>
-                    <span className="size-2 rounded-full bg-muted-foreground/40" />
-                    <span className="size-2 rounded-full bg-muted-foreground/40" />
-                    <span className="size-2 rounded-full bg-muted-foreground/40" />
-                </span>
-                <span className="ml-2 truncate font-mono text-[10px] sm:text-xs uppercase tracking-label text-muted-foreground">
-                    {label}
-                </span>
-            </div>
+            <WindowBar title={label} />
             <div className={bleed ? undefined : "p-4 sm:p-8 lg:p-10"}>
                 {children}
             </div>
@@ -66,107 +75,170 @@ function Chrome({
     );
 }
 
-function Prompt({ children }: { children: React.ReactNode }) {
+// A terminal window drawn the way one actually looks: dark ground, macOS
+// traffic lights, a session title, and output in an ANSI-style palette that
+// stays the same in both site themes because it is depicting a screenshot.
+function Terminal({
+    title,
+    children,
+}: {
+    title: string;
+    children: React.ReactNode;
+}) {
     return (
-        <p className="flex gap-2">
-            <span aria-hidden className="select-none text-brand">
-                $
+        <div className="terminal project-window mx-auto w-full max-w-4xl overflow-hidden rounded-lg shadow-work transition-transform duration-slow ease-out-expo group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none">
+            <WindowBar title={title} />
+            <div className="p-4 font-mono text-[11px] leading-[1.7] sm:p-6 sm:text-[13px]">
+                {Children.map(children, (child, index) => (
+                    <div
+                        className="terminal-line"
+                        style={{ "--n": index } as CSSProperties}
+                    >
+                        {child}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// The robbyrussell zsh prompt, colour for colour.
+function Prompt({
+    dir,
+    branch,
+    dirty,
+    children,
+}: {
+    dir: string;
+    branch: string;
+    dirty?: boolean;
+    children?: React.ReactNode;
+}) {
+    return (
+        <p className="whitespace-pre-wrap">
+            <span aria-hidden className="t-green select-none">
+                ➜{"  "}
             </span>
-            <span className="min-w-0">{children}</span>
+            <span className="t-cyan">{dir}</span>{" "}
+            <span className="t-blue">git:(</span>
+            <span className="t-red">{branch}</span>
+            <span className="t-blue">)</span>
+            {dirty && <span className="t-yellow"> ✗</span>}{" "}
+            {children ?? <span aria-hidden className="terminal-cursor" />}
+        </p>
+    );
+}
+
+function Blank() {
+    return <p aria-hidden>&nbsp;</p>;
+}
+
+function Stage({
+    label,
+    detail,
+    time,
+}: {
+    label: string;
+    detail: string;
+    time: string;
+}) {
+    return (
+        <p className="flex gap-3">
+            <span aria-hidden className="t-green select-none">
+                ✔
+            </span>
+            <span className="min-w-[13ch] shrink-0 sm:min-w-[18ch]">
+                {label}
+            </span>
+            <span className="t-dim min-w-0 flex-1 truncate">{detail}</span>
+            <span className="t-dim hidden shrink-0 sm:inline">{time}</span>
         </p>
     );
 }
 
 function Finding({
-    at,
+    file,
+    line,
+    kind,
     code,
     note,
 }: {
-    at: string;
+    file: string;
+    line: number;
+    kind: string;
     code: string;
     note: string;
 }) {
     return (
-        <div className="mt-3">
-            <p className="flex flex-wrap items-center gap-2">
-                <span className="rounded bg-brand-pop px-1.5 font-mono text-[10px] uppercase tracking-label text-brand-pop-ink">
-                    High
+        <>
+            <p className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 pl-3 sm:pl-5">
+                <span className="t-cyan">
+                    {file}
+                    <span className="t-dim">:{line}</span>
                 </span>
-                <span className="text-muted-foreground">{at}</span>
+                <span className="t-badge">HIGH</span>
+                <span className="t-yellow">{kind}</span>
             </p>
-            <p className="mt-1 flex gap-2 overflow-x-auto">
+            <p className="flex gap-3 pl-3 sm:pl-5">
                 <span
                     aria-hidden
-                    className="select-none text-muted-foreground/50"
+                    className="t-dim select-none whitespace-nowrap tabular-nums"
                 >
-                    &#9474;
+                    {line} │
                 </span>
-                <span className="whitespace-pre text-brand">{code}</span>
+                <span className="whitespace-pre-wrap break-all">{code}</span>
             </p>
-            <p className="flex gap-2 text-muted-foreground">
-                <span
-                    aria-hidden
-                    className="select-none text-muted-foreground/50"
-                >
-                    &#9492;
+            <p className="t-dim flex gap-3 pl-3 sm:pl-5">
+                <span aria-hidden className="select-none whitespace-pre">
+                    {" ".repeat(String(line).length)} └
                 </span>
                 <span>{note}</span>
             </p>
-        </div>
+        </>
     );
 }
 
 function CodeReview() {
-    const stages = [
-        ["extract diff", "4 files"],
-        ["retrieve context", "chroma · 11 chunks"],
-        ["analyse", "gpt-4o"],
-    ] as const;
-
+    const at = { dir: "code-review-agent", branch: "feat/checkout" };
     return (
-        <Chrome label="~/code-review-agent — github actions">
-            <div className="font-mono text-xs leading-relaxed sm:text-sm">
-                <Prompt>
-                    gh workflow run code-review.yml --ref feat/checkout
-                </Prompt>
-
-                <div className="mt-3 flex flex-col gap-0.5">
-                    {stages.map(([stage, detail]) => (
-                        <p
-                            key={stage}
-                            className="flex gap-2 text-muted-foreground"
-                        >
-                            <span
-                                aria-hidden
-                                className="select-none text-green"
-                            >
-                                &#10003;
-                            </span>
-                            <span className="flex-1">{stage}</span>
-                            <span>{detail}</span>
-                        </p>
-                    ))}
-                </div>
-
-                <Finding
-                    at="src/db/client.py:12"
-                    code={'password = "s3cr3t-prod-key"'}
-                    note="secret in source — rotate it, it is already in the git history"
-                />
-                <Finding
-                    at="src/auth/session.py:41"
-                    code={'execute(f"select * from users where id = {uid}")'}
-                    note="sql injection — pass uid as a query parameter"
-                />
-
-                <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-label text-muted-foreground sm:text-xs">
-                    <span>4 files scanned</span>
-                    <span>2 findings</span>
-                    <span>0 style comments</span>
-                    <span className="text-brand">posted to #248</span>
-                </p>
-            </div>
-        </Chrome>
+        <Terminal title="code-review-agent — python · 104×30">
+            <Prompt {...at} dirty>
+                python -m agent.review --pr 248
+            </Prompt>
+            <Stage
+                label="extract diff"
+                detail="4 files · +212 −38"
+                time="0.2s"
+            />
+            <Stage
+                label="retrieve context"
+                detail="chroma · 11 chunks across 6 files"
+                time="0.9s"
+            />
+            <Stage label="analyse" detail="gpt-4o · 2 findings" time="3.8s" />
+            <Blank />
+            <Finding
+                file="src/db/client.py"
+                line={12}
+                kind="hardcoded secret"
+                code={'password = "s3cr3t-prod-key"'}
+                note="rotate it — the value is already in git history"
+            />
+            <Blank />
+            <Finding
+                file="src/auth/session.py"
+                line={41}
+                kind="sql injection"
+                code={'execute(f"select * from users where id = {uid}")'}
+                note="pass uid as a bound query parameter"
+            />
+            <Blank />
+            <p className="flex flex-wrap gap-x-3">
+                <span className="t-green">✔ posted 2 review comments</span>
+                <span className="t-dim">on #248 · 0 style comments · 5.1s</span>
+            </p>
+            <Prompt {...at} dirty />
+        </Terminal>
     );
 }
 
@@ -195,41 +267,91 @@ function Shot({
     );
 }
 
-function SubscriptionApi() {
+function Request({
+    method,
+    path,
+    status,
+    time,
+    note,
+}: {
+    method: string;
+    path: string;
+    status: number;
+    time: string;
+    note?: string;
+}) {
     return (
-        <Chrome label="~/subscription-tracker — zsh">
-            <div className="font-mono text-xs leading-relaxed sm:text-sm">
-                <Prompt>
-                    <span className="whitespace-pre-wrap">
-                        curl -X POST /api/v1/subscriptions -H
-                        &quot;Authorization: Bearer $TOKEN&quot; -d
-                        @renewal.json
-                    </span>
-                </Prompt>
+        <p className="flex flex-wrap gap-x-3">
+            <span className="t-magenta w-[4ch]">{method}</span>
+            <span>{path}</span>
+            <span className={status < 400 ? "t-green" : "t-red"}>{status}</span>
+            <span className="t-dim">{time}</span>
+            {note && <span className="t-dim">· {note}</span>}
+        </p>
+    );
+}
 
-                <p className="mt-3">
-                    <span className="text-green">201</span>
-                    <span className="text-muted-foreground"> Created</span>
-                </p>
-                <div className="mt-1 overflow-x-auto whitespace-pre text-muted-foreground">
-                    {`{
-  "id": "sub_8fa21",
-  "renews": "2026-04-01",
-  "reminder": "scheduled"
-}`}
-                </div>
-
-                <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-label text-muted-foreground sm:text-xs">
-                    <span>
-                        x-ratelimit-remaining{" "}
-                        <span className="text-foreground">96 / 100</span>
-                    </span>
-                    <span>
-                        bot-check <span className="text-green">passed</span>
-                    </span>
-                </p>
-            </div>
-        </Chrome>
+function SubscriptionApi() {
+    const at = { dir: "subscription-tracker", branch: "main" };
+    return (
+        <Terminal title="subscription-tracker — node · 104×30">
+            <Prompt {...at}>npm run dev</Prompt>
+            <p className="t-dim">[nodemon] starting `node app.js`</p>
+            <p>
+                <span className="t-green">✔</span> MongoDB connected{" "}
+                <span className="t-dim">(development)</span>
+            </p>
+            <p>
+                <span className="t-green">✔</span> API listening on{" "}
+                <span className="t-cyan">http://localhost:5500</span>
+            </p>
+            <p>
+                <span className="t-green">✔</span> renewal reminders scheduled{" "}
+                <span className="t-dim">cron 0 9 * * *</span>
+            </p>
+            <Blank />
+            <Request
+                method="POST"
+                path="/api/v1/auth/sign-in"
+                status={200}
+                time="84.2 ms"
+            />
+            <Request
+                method="POST"
+                path="/api/v1/subscriptions"
+                status={201}
+                time="42.3 ms"
+                note="arcjet allow · rate 96/100"
+            />
+            <Request
+                method="GET"
+                path="/api/v1/subscriptions/sub_8fa21"
+                status={200}
+                time="7.9 ms"
+            />
+            <Request
+                method="POST"
+                path="/api/v1/subscriptions"
+                status={429}
+                time="1.1 ms"
+                note="arcjet deny · rate limit"
+            />
+            <Request
+                method="GET"
+                path="/api/v1/users/6f1a"
+                status={403}
+                time="2.4 ms"
+                note="role: user ≠ admin"
+            />
+            <Blank />
+            <p className="t-dim">
+                [cron] renewal sweep · 3 subscriptions renew in 7 days · 3
+                reminders sent
+            </p>
+            <p>
+                <span aria-hidden className="terminal-cursor" />
+            </p>
+        </Terminal>
     );
 }
 
