@@ -1,0 +1,214 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>code-review-agent demo</title>
+<style>
+    @font-face {
+        font-family: "Geist Mono";
+        src: url("../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")
+            format("woff2");
+        font-weight: 400;
+    }
+    @font-face {
+        font-family: "Geist Mono";
+        src: url("../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Bold.woff2")
+            format("woff2");
+        font-weight: 700;
+    }
+    /* The same fixed palette as .project-window in src/app/globals.css: the
+       video is a screenshot of a dark terminal, whatever the site theme. */
+    :root {
+        --t-bg: #0d1117;
+        --t-bar: #161b22;
+        --t-fg: #e6edf3;
+        --t-dim: #8b949e;
+        --t-green: #3fb950;
+        --t-yellow: #d29922;
+        --t-red: #f85149;
+        --t-cyan: #79c0ff;
+        --t-blue: #58a6ff;
+        --t-magenta: #d2a8ff;
+    }
+    html,
+    body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--t-bg);
+    }
+    .terminal {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        color: var(--t-fg);
+        font-family: "Geist Mono", ui-monospace, monospace;
+    }
+    .bar {
+        position: relative;
+        display: flex;
+        flex: none;
+        align-items: center;
+        height: 64px;
+        padding: 0 28px;
+        background: var(--t-bar);
+        border-bottom: 1px solid rgb(255 255 255 / 0.06);
+    }
+    .lights {
+        display: flex;
+        gap: 16px;
+    }
+    .lights span {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
+    .title {
+        position: absolute;
+        inset-inline: 160px;
+        text-align: center;
+        font-size: 24px;
+        color: var(--t-dim);
+    }
+    .body {
+        flex: 1;
+        padding: 32px 48px;
+        font-size: 26px;
+        line-height: 40px;
+        overflow: hidden;
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+    .body p {
+        margin: 0;
+        min-height: 40px;
+    }
+    .t-dim {
+        color: var(--t-dim);
+    }
+    .t-green {
+        color: var(--t-green);
+    }
+    .t-yellow {
+        color: var(--t-yellow);
+    }
+    .t-red {
+        color: var(--t-red);
+    }
+    .t-cyan {
+        color: var(--t-cyan);
+    }
+    .t-blue {
+        color: var(--t-blue);
+    }
+    .t-magenta {
+        color: var(--t-magenta);
+    }
+    .t-bold {
+        font-weight: 700;
+    }
+    .t-badge,
+    .t-badge-medium,
+    .t-badge-low {
+        padding: 0 0.4em;
+        border-radius: 4px;
+        background: var(--t-red);
+        color: var(--t-bg);
+        font-size: 0.85em;
+        font-weight: 700;
+    }
+    .t-badge-medium {
+        background: var(--t-yellow);
+    }
+    .t-badge-low {
+        background: var(--t-dim);
+    }
+    .cursor {
+        display: inline-block;
+        width: 0.6em;
+        height: 1.15em;
+        vertical-align: text-bottom;
+        background: var(--t-fg);
+    }
+</style>
+<div class="terminal">
+    <div class="bar">
+        <div class="lights" aria-hidden="true">
+            <span style="background: #ff5f57"></span>
+            <span style="background: #febc2e"></span>
+            <span style="background: #28c840"></span>
+        </div>
+        <div class="title" id="title"></div>
+    </div>
+    <div class="body" id="body"></div>
+</div>
+<script>
+    // init(session) takes the session render.mjs builds from transcript.txt.
+    // render(t) then draws it as it looks t seconds in and returns a key that
+    // only changes when the picture does, so the renderer can skip identical
+    // frames. Deterministic: the same t always draws the same frame.
+    (() => {
+        const esc = (s) =>
+            s
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        const span = (segment) =>
+            segment.cls
+                ? `<span class="t-${segment.cls}">${esc(segment.text)}</span>`
+                : esc(segment.text);
+        const body = document.getElementById("body");
+
+        window.init = (S) => {
+            document.getElementById("title").textContent = S.title;
+            const prompt =
+                `<span class="t-green">➜  </span><span class="t-cyan">${esc(S.prompt.dir)}</span> ` +
+                `<span class="t-blue">git:(</span><span class="t-red">${esc(S.prompt.branch)}</span><span class="t-blue">)</span> `;
+
+            // Absolute times: the command types out, then each line waits
+            // its own delay after the previous one.
+            const entered =
+                S.typing.start + S.command.length / S.typing.cps + 0.5;
+            let clock = entered;
+            const lines = S.lines.map((line) => {
+                clock += line.d;
+                return { at: clock, html: line.segments.map(span).join("") };
+            });
+            const done = clock + 0.8;
+            window.DURATION = done + S.tail;
+
+            window.render = (t) => {
+                const chars = Math.max(
+                    0,
+                    Math.min(
+                        S.command.length,
+                        Math.floor((t - S.typing.start) * S.typing.cps)
+                    )
+                );
+                const running = t >= entered;
+                const shown = lines.filter((line) => line.at <= t);
+                const finished = t >= done;
+                const on = Math.floor(t / 0.5) % 2 === 0;
+                const cursor = on ? '<span class="cursor"></span>' : "";
+
+                const out = [
+                    `<p>${prompt}${esc(S.command.slice(0, chars))}${running ? "" : cursor}</p>`,
+                    ...shown.map((line) => `<p>${line.html}</p>`),
+                ];
+                if (running && !finished) out.push(`<p>${cursor}</p>`);
+                if (finished) out.push(`<p>${prompt}${cursor}</p>`);
+                body.innerHTML = out.join("");
+                // Scroll by whole rows, the way a terminal does: every row is
+                // 40px tall under 32px of padding, so a scroll offset of
+                // 32 + k * 40 puts row k flush with the top edge.
+                const overflow = body.scrollHeight - body.clientHeight;
+                body.scrollTop =
+                    overflow > 0
+                        ? 32 + Math.ceil((overflow - 32) / 40) * 40
+                        : 0;
+                return `${chars}|${shown.length}|${finished}|${on}`;
+            };
+            return window.DURATION;
+        };
+    })();
+</script>

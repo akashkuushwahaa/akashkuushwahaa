@@ -63,7 +63,7 @@
 
 % ---------------- Summary ----------------
 \section{Professional Summary}
-\textbf{Software Engineer} building full-stack web applications and \textbf{LLM-powered tools} in \textbf{TypeScript, JavaScript, Python, React.js, Next.js, and Node.js}. Shipped full-stack dashboard features during a three-month SDE internship, owning both the Next.js API routes behind them and the React interfaces on top, and built a security code-review agent that runs in a GitHub Actions CI/CD pipeline and uses RAG retrieval to reach 0.914 F1 on a labeled evaluation set.
+\textbf{Software Engineer} building full-stack web applications and \textbf{LLM-powered tools} in \textbf{TypeScript, JavaScript, Python, React.js, Next.js, and Node.js}. Shipped full-stack dashboard features during a three-month SDE internship, owning both the Next.js API routes behind them and the React interfaces on top, and built a lens-based code-review agent that ships as a GitHub App and Action, where a second-opinion verifier lifts security precision to 1.00 on a labeled evaluation set.
 
 % ---------------- Skills ----------------
 \section{Technical Skills}
@@ -92,12 +92,12 @@
 % ---------------- Projects ----------------
 \section{Projects}
 
-\textbf{Code Review Agent: Automated Security PR Reviewer} \hfill \href{https://github.com/akashkuushwahaa/code-review-agent}{\textbf{[GitHub]}} \\
-{\small\textit{Python, OpenAI API, RAG, Chroma, FastAPI, Next.js, SQLite, Docker, GitHub Actions}}
+\textbf{Code Review Agent: Lens-Based PR Reviewer and GitHub App} \hfill \href{https://github.com/akashkuushwahaa/code-review-agent}{\textbf{[GitHub]}} \\
+{\small\textit{Python, OpenAI API, RAG, tree-sitter, FastAPI, Next.js, SQLite, Docker, GitHub Apps \& Actions}}
 \begin{itemize}
-  \item Built a security-scoped review agent that flags hardcoded secrets and SQL or command injection, posting line-anchored comments automatically on every pull request.
-  \item Added a labeled evaluation harness (precision, recall, F1 on 20 cases) and A/B-tested retrieval: full-file and cross-file context raised F1 from \textbf{0.82 to 0.914}.
-  \item Persisted findings with cross-run deduplication and containerized the stack (agent, API service, dashboard) behind a single compose file.
+  \item Built an advisory PR reviewer from seven narrow lenses (security, correctness, dependencies, performance, infra, tests, maintainability), each gated on its own labeled eval set at $\geq$ 0.80 precision over three runs before shipping on by default; 537 tests, no network.
+  \item Added a second-opinion verifier that must quote the added lines or withdraw, raising security-lens precision from \textbf{0.87 to 1.00} at 0.99 recall; earlier, full-file and cross-file context (ast and tree-sitter chunks over a numpy store) raised F1 from \textbf{0.82 to 0.914}.
+  \item Shipped one-click suggested fixes (100\% of proposals parse and pass on ten mechanical cases), a PR summary, per-repository memory of rejected findings, and four run surfaces: CLI, pre-push hook with SARIF, GitHub Action, and a GitHub App with a webhook worker and Next.js dashboard.
 \end{itemize}
 
 \vspace{0.8mm}

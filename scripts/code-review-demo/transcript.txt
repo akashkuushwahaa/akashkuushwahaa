@@ -1,0 +1,65 @@
+Reviewing PR #1 in akashkuushwahaa/code-review-agent-demo: "Add search, filter, and export endpoints" (dry run — nothing will be posted)
+Provider: nvidia — security: nvidia/nemotron-3-super-120b-a12b, correctness: nvidia/nemotron-3-super-120b-a12b, performance: nvidia/nemotron-3-super-120b-a12b, infra: nvidia/nemotron-3-super-120b-a12b
+PR context: 1 file(s) changed, 0 of them tests; test suite in repo: none found.
+1 reviewable file(s) out of 1 changed.
+Indexed 1 source file(s) for cross-file context.
+
+Reviewing app.py...
+  [warn] could not parse model output for app.py, skipping
+  9 finding(s):
+    - [high] line 15: Hardcoded API key
+    - [high] line 55: SQL injection via string concatenation
+    - [high] line 72: Use of eval on user-controlled input
+    - [high] line 79: Command injection via os.system with unsanitized input
+    - [medium] line 50: Resource leak: database connection not released on exception
+    - [high] line 52: Unhandled exception: SQL execution can fail
+    - [medium] line 66: Resource leak: database connection not released on exception
+    - [high] line 71: Unhandled exception: eval can fail
+    - [medium] line 79: Error handling: os.system return value ignored
+
+Merged 2 finding(s) reported by more than one lens on the same or an adjacent line.
+Verifying 7 finding(s) with nvidia nvidia/nemotron-3-super-120b-a12b...
+  [verifier] dropped the suggestion on sec-f2e8 app.py:55 — The line directly concatenates user‑supplied username into the SQL query without sanitization, enabling SQL injection.
+  [warn] could not parse model output for app.py:79, skipping
+[dry run] would attach a suggestion to app.py:15: PAYMENT_API_KEY = os.environ.get("PAYMENT_API_KEY", "")
+
+What this PR does (review effort L, 1 file)
+  Adds /search endpoint that builds SQL with string concatenation.
+  Adds /filter endpoint that evaluates user‑provided expressions with eval.
+  Adds /export endpoint that runs os.system to export CSV.
+  Introduces a hardcoded PAYMENT_API_KEY constant.
+Where to look first:
+  1. app.py — Contains the new endpoints and all security findings (SQL injection, eval, command injection, hardcoded key, resource leaks).
+Description vs diff: matches the diff
+Breaking changes: none found in the diff
+
+[dry run] Would post summary comment:
+
+### 🔍 Automated Code Review
+
+<details>
+<summary><b>What this PR does</b> · review effort L · 1 file</summary>
+
+Adds /search endpoint that builds SQL with string concatenation.
+Adds /filter endpoint that evaluates user‑provided expressions with eval.
+Adds /export endpoint that runs os.system to export CSV.
+Introduces a hardcoded PAYMENT_API_KEY constant.
+
+**Where to look first**
+1. `app.py` — Contains the new endpoints and all security findings (SQL injection, eval, command injection, hardcoded key, resource leaks).
+
+**Description vs diff:** matches the diff
+**Breaking changes:** none found in the diff
+
+</details>
+
+Found **7** potential issue(s) across 1 file(s): 5 high, 2 medium, 0 low severity. Lenses: security, correctness, dependencies, performance, infra.
+
+0 comment(s) posted inline (threshold: medium+).
+_This review: $0.0000 across 11 model call(s) (nvidia · nvidia/nemotron-3-super-120b-a12b), 0% of prompt tokens served from cache; verifier $0.0000 across 7 call(s), 0 withdrawn._
+
+_Advisory only — findings should be verified by a human reviewer; this check never blocks a merge._
+<!-- code-review-agent:summary -->
+
+[dry run] Total findings: 7 (nothing posted).
+Cost: $0.0000 — 11 call(s), 25,764 prompt tokens (0% cached), 75,406 completion, 1468.3s, nvidia; verifier $0.0000 (7 call(s), 0 withdrawn)

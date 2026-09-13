@@ -5,7 +5,7 @@ Guidance for Claude Code (claude.ai/code) when working in this repository.
 ## What this repo is
 
 Two things in one place:
-
+<!---->
 1. **`README.md`** — the GitHub profile README. The `codetime` workflow in
    `.github/workflows/` rewrites the block between the
    `<!--START_SECTION:codetime-->` markers. Do not hand-edit inside those
@@ -68,6 +68,15 @@ in `src/data/hello-signature.ts` are generated — run `npm run signature` after
 changing `DATA.name`, do not edit the file. Each pen stroke is its own
 `<path>` on purpose: browsers restart the dash pattern on every subpath, so a
 compound path cannot be revealed in order.
+
+**Code Review Agent demo video.** `public/code-review-demo.mp4` is rendered,
+not screen-recorded: `scripts/code-review-demo/session.js` holds the terminal
+transcript (the output of a real run), `page.html` draws it in the site's
+terminal window, and `npm run demo:code-review` drives headless Edge over the
+DevTools protocol and encodes the frames with ffmpeg (`EDGE` and `FFMPEG` point
+at the binaries when they are not on PATH). Edit the transcript and re-render;
+do not hand-edit the video. The poster in `project-visual.tsx` should keep
+depicting the same run.
 
 Static assets belong in `public/`, not `content/` — `content/` is parsed as
 markdown and is not served.

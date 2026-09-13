@@ -72,7 +72,7 @@ decisions that mattered, what the numbers did, and what I would change.
 
 | Project | What it does | Measured |
 | :--- | :--- | :--- |
-| [Code Review Agent](https://github.com/akashkuushwahaa/code-review-agent) | Security-scoped PR reviewer. Reads every diff, flags hardcoded secrets and SQL or command injection, posts line-anchored comments through GitHub Actions | F1 **0.82 → 0.914** on a labeled set, from retrieval alone |
+| [Code Review Agent](https://github.com/akashkuushwahaa/code-review-agent) | Advisory PR reviewer built from narrow, measured lenses: security, correctness, dependencies, performance, infra. A verifier must quote the evidence or withdraw, fixes arrive as one-click suggestion blocks, and rejected findings are remembered per repository. Runs as a CLI, a pre-push hook, a GitHub Action or a GitHub App | Security precision **0.87 → 1.00** with the verifier; F1 0.82 → 0.914 from retrieval alone |
 | [Job Pilot](https://jobpilot-sigma-rose.vercel.app/) | Agentic job search. Sources live postings, researches each company with a headless browser, scores fit against your resume, generates a tailored PDF | Live |
 | [Subscription API](https://github.com/akashkuushwahaa/subscription-tracker) | Full subscription lifecycle over REST — JWT auth, role-scoped routes, edge rate limiting and bot detection, scheduled renewal reminders | — |
 | [Job Application Assistant](https://github.com/akashkuushwahaa/job-application-assistant) | Four-stage LLM pipeline that matches a resume to a posting, names the gaps, drafts the letter, rewrites the resume — every claim bound to a parsed fact | **~25 min → under 1 min** per tailored application |

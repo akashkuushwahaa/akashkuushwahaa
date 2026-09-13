@@ -8,7 +8,7 @@ export const DATA = {
     locationLink: "https://www.google.com/maps/place/ahmedabad",
     description: "Full-stack engineer • LLM tooling in TypeScript and Python",
     summary:
-        "I build full-stack web applications and LLM-powered tools, mostly in TypeScript and Python.\n\nThe work I care about sits where a product meets a model. It is easy to get a language model to produce something that looks correct. Getting it to produce something correct enough to put in front of a user, repeatedly, is a different problem, and it turns out to be an engineering problem more than a prompting one: retrieval, evaluation, guardrails, and knowing when to keep a human in the loop.\n\nThat is what the [Code Review Agent](/projects/code-review-agent) taught me. It started at 0.82 F1 on a labeled set and reached 0.914. Nothing about the prompt changed; the retrieval did. I only knew that because I had built the labeled set first.\n\nBefore that I spent three months as an SDE intern at [CultureX](https://www.culturex.ai), shipping full-stack dashboard features on a weekly release cycle — the Next.js API routes behind them and the React interfaces on top. I am finishing a B.Tech in Computer Science & Engineering (AI & ML) at SAL Institute of Technology, expected 2027, and I am currently open to work.",
+        "I build full-stack web applications and LLM-powered tools, mostly in TypeScript and Python.\n\nThe work I care about sits where a product meets a model. It is easy to get a language model to produce something that looks correct. Getting it to produce something correct enough to put in front of a user, repeatedly, is a different problem, and it turns out to be an engineering problem more than a prompting one: retrieval, evaluation, guardrails, and knowing when to keep a human in the loop.\n\nThat is what the [Code Review Agent](/projects/code-review-agent) taught me. Its first version went from 0.82 to 0.914 F1 without a prompt change, because the retrieval changed. Its second version grew into seven measured lenses and a verifier that has to quote its evidence or withdraw, which took the security lens from 0.87 precision to 1.00. I only knew any of that because the labeled sets came before the prompts.\n\nBefore that I spent three months as an SDE intern at [CultureX](https://www.culturex.ai), shipping full-stack dashboard features on a weekly release cycle — the Next.js API routes behind them and the React interfaces on top. I am finishing a B.Tech in Computer Science & Engineering (AI & ML) at SAL Institute of Technology, expected 2027, and I am currently open to work.",
     hero: {
         role: "Full-stack engineer",
         focus: "LLM tooling in TypeScript and Python",
@@ -30,7 +30,7 @@ export const DATA = {
     principles: [
         {
             title: "Build the labeled set first",
-            body: "I built a labeled test set before tuning the Code Review Agent. It gave me a baseline to check whether each change improved the results.",
+            body: "Every lens in the Code Review Agent got a labeled set before it got a prompt, and ships on by default only after three runs at 0.80 precision or better. The tests lens missed the bar, so it ships off, with its numbers published.",
         },
         {
             title: "Change what the model sees",
@@ -197,24 +197,24 @@ export const DATA = {
             href: "/projects/code-review-agent",
             dates: "Solo build",
             outcome:
-                "Retrieval changes, not prompt changes, moved F1 by nine points",
+                "A verifier that must quote its evidence took security precision from 0.87 to 1.00",
             featured: true,
             description:
-                "A pull-request reviewer scoped to security. It reads every diff, flags hardcoded secrets and SQL or command injection, and posts line-anchored comments through GitHub Actions.",
+                "An advisory pull-request reviewer built from narrow, measured lenses. Each finding is checked by a second opinion that must quote the evidence, tiered by confidence, posted with a one-click fix where the fix is mechanical, and remembered if the team rejects it. Runs as a CLI, a pre-push hook, a GitHub Action or a GitHub App.",
             metric: {
-                label: "F1 on labeled set",
-                from: "0.82",
-                to: "0.914",
+                label: "Precision, security lens",
+                from: "0.87",
+                to: "1.00",
             },
             technologies: [
                 "Python",
                 "OpenAI",
-                "Chroma (RAG)",
+                "tree-sitter",
                 "FastAPI",
                 "Next.js",
                 "SQLite",
                 "Docker",
-                "GitHub Actions",
+                "GitHub App",
             ],
             links: [
                 {

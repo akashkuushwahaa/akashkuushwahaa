@@ -8,14 +8,16 @@ order: 1
 # about.md
 
 I enjoy building tools that take a repetitive task off someone’s plate.
-That has led me to projects like a security-focused code reviewer and tools
+That has led me to projects like an advisory code reviewer for pull requests and tools
 that help people prepare job applications. Most of my work is in TypeScript
 and Python.
 
 With language models, the part that interests me is figuring out when an
 answer can be trusted. Building the [Code Review Agent](/projects/code-review-agent)
 got me into retrieval and evaluation: collecting examples, checking mistakes,
-and understanding why a change helped.
+and understanding why a change helped. Its second version added a verifier
+that has to quote its evidence before a finding is posted, and a memory of
+what reviewers rejected.
 
 At [CultureX](/work/culturex), I spent three months building dashboard features
 from the API through to the React interface. Shipping every week and reviewing

@@ -8,8 +8,9 @@ import assistantShot from "../../public/job-application-assistant.png";
 interface Props {
     slug: string;
     className?: string;
-    // Case studies get the real screen recording behind a click; cards keep the
-    // static visual so the home page never pulls a video it may not need.
+    // Case studies get the rendered run (scripts/code-review-demo) behind a
+    // click; cards keep the static visual so the home page never pulls a video
+    // it may not need.
     interactive?: boolean;
 }
 
@@ -160,12 +161,16 @@ function Finding({
     file,
     line,
     kind,
+    confidence,
+    also,
     code,
     note,
 }: {
     file: string;
     line: number;
     kind: string;
+    confidence?: string;
+    also?: string;
     code: string;
     note: string;
 }) {
@@ -178,6 +183,10 @@ function Finding({
                 </span>
                 <span className="t-badge">HIGH</span>
                 <span className="t-yellow">{kind}</span>
+                {confidence && (
+                    <span className="t-dim">confidence {confidence}</span>
+                )}
+                {also && <span className="t-magenta">{also}</span>}
             </p>
             <p className="flex gap-3 pl-3 sm:pl-5">
                 <span
@@ -199,45 +208,62 @@ function Finding({
 }
 
 function CodeReview() {
-    const at = { dir: "code-review-agent", branch: "feat/checkout" };
+    const at = { dir: "code-review-agent", branch: "main" };
     return (
         <Terminal title="code-review-agent — python · 104×30">
-            <Prompt {...at} dirty>
-                python -m agent.review --pr 248
+            <Prompt {...at}>
+                python review.py
+                https://github.com/akashkuushwahaa/code-review-agent-demo/pull/1
             </Prompt>
             <Stage
-                label="extract diff"
-                detail="4 files · +212 −38"
-                time="0.2s"
+                label="fetch"
+                detail="PR #1 · app.py · +38 −0 · full file + cross-file context"
+                time="1.8s"
             />
             <Stage
-                label="retrieve context"
-                detail="chroma · 11 chunks across 6 files"
-                time="0.9s"
+                label="lenses"
+                detail="security · correctness · dependencies · performance · infra"
+                time="9m 12s"
             />
-            <Stage label="analyse" detail="gpt-4o · 2 findings" time="3.8s" />
+            <Stage
+                label="merge + verify"
+                detail="9 findings → 7 · 7 confirmed with quoted evidence · 0 withdrawn"
+                time="13m 05s"
+            />
             <Blank />
             <Finding
-                file="src/db/client.py"
-                line={12}
+                file="app.py"
+                line={15}
                 kind="hardcoded secret"
-                code={'password = "s3cr3t-prod-key"'}
-                note="rotate it — the value is already in git history"
+                confidence="high"
+                code={
+                    'PAYMENT_API_KEY = "hardcoded-demo-secret-do-not-use-1234567890abcdef"'
+                }
+                note={
+                    'fix: PAYMENT_API_KEY = os.environ.get("PAYMENT_API_KEY", "")'
+                }
             />
             <Blank />
             <Finding
-                file="src/auth/session.py"
-                line={41}
-                kind="sql injection"
-                code={'execute(f"select * from users where id = {uid}")'}
-                note="pass uid as a bound query parameter"
+                file="app.py"
+                line={72}
+                kind="unsafe deserialization"
+                confidence="high"
+                also="also correctness"
+                code={
+                    'results = [r for r in rows if eval(expr, {"id": r[0], "username": r[1], …})]'
+                }
+                note="request input reaches eval; no mechanical fix, the comment explains a rewrite"
             />
             <Blank />
             <p className="flex flex-wrap gap-x-3">
-                <span className="t-green">✔ posted 2 review comments</span>
-                <span className="t-dim">on #248 · 0 style comments · 5.1s</span>
+                <span className="t-green">✔ posted 7 comments + summary</span>
+                <span className="t-dim">
+                    on #1 · 1 suggestion block · $0.00 · nemotron via nvidia ·
+                    24m 28s
+                </span>
             </p>
-            <Prompt {...at} dirty />
+            <Prompt {...at} />
         </Terminal>
     );
 }

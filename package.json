@@ -7,7 +7,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint .",
-        "signature": "node scripts/hello-signature/generate.mjs"
+        "signature": "node scripts/hello-signature/generate.mjs",
+        "demo:code-review": "node scripts/code-review-demo/render.mjs"
     },
     "dependencies": {
         "@radix-ui/react-avatar": "^1.1.11",

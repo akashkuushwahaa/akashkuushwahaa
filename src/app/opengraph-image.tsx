@@ -67,11 +67,11 @@ export default function OGImage() {
                         color: "#8f8f8f",
                     }}
                 >
-                    <span style={{ color: "#8f8f8f" }}>F1 0.82</span>
+                    <span style={{ color: "#8f8f8f" }}>precision 0.87</span>
                     <span style={{ color: "#525252" }}>→</span>
-                    <span style={{ color: "#fafafa" }}>0.914</span>
+                    <span style={{ color: "#fafafa" }}>1.00</span>
                     <span style={{ color: "#525252" }}>·</span>
-                    <span>retrieval, not prompting</span>
+                    <span>verified, not assumed</span>
                 </div>
             </div>
         ),
