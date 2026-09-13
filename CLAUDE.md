@@ -70,9 +70,9 @@ changing `DATA.name`, do not edit the file. Each pen stroke is its own
 compound path cannot be revealed in order.
 
 **Code Review Agent demo video.** `public/code-review-demo.mp4` is rendered,
-not screen-recorded: `scripts/code-review-demo/session.js` holds the terminal
-transcript (the output of a real run), `page.html` draws it in the site's
-terminal window, and `npm run demo:code-review` drives headless Edge over the
+not screen-recorded: `scripts/code-review-demo/transcript.txt` is the verbatim
+output of a real run, `render.mjs` colours and paces it, `page.html` draws it
+in the site's terminal window, and `npm run demo:code-review` drives headless Edge over the
 DevTools protocol and encodes the frames with ffmpeg (`EDGE` and `FFMPEG` point
 at the binaries when they are not on PATH). Edit the transcript and re-render;
 do not hand-edit the video. The poster in `project-visual.tsx` should keep
@@ -85,9 +85,11 @@ All are statically generated at build time.
 
 **Markdown conventions.** Every content file opens with an H1 that repeats its
 frontmatter `title`; the loader strips that leading H1 so the page does not
-render it twice. Architecture diagrams are indented code blocks of box-drawing
-characters — `globals.css` tightens `pre > code` line-height so the `│` runs
-connect. Do not restore the global line-number counters that shipped with the
+render it twice. A pipeline is a ````pipeline` fence, one stage per line as
+`name | what happens | aside`; `remarkPipeline` in `content.ts` turns it into
+the `.pipeline` ledger styled in `globals.css`. Older architecture diagrams
+are indented code blocks of box-drawing characters — `globals.css` tightens
+`pre > code` line-height so the `│` runs connect. Do not restore the global line-number counters that shipped with the
 upstream template; they number those diagrams.
 
 **Animations.** `BlurFade` and `BlurFadeText` (`src/components/magicui/`)

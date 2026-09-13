@@ -35,10 +35,104 @@ export type Doc = {
     headings: Heading[];
 };
 
+type MarkdownNode = {
+    type: string;
+    lang?: string | null;
+    value?: string;
+    children?: MarkdownNode[];
+    data?: Record<string, unknown>;
+};
+
+type HastNode =
+    | { type: "text"; value: string }
+    | {
+          type: "element";
+          tagName: string;
+          properties: Record<string, unknown>;
+          children: HastNode[];
+      };
+
+const element = (
+    tagName: string,
+    className: string[],
+    children: HastNode[]
+): HastNode => ({
+    type: "element",
+    tagName,
+    properties: { className },
+    children,
+});
+
+// Backticks in a stage's text become <code>, the way they do in prose.
+function inline(source: string): HastNode[] {
+    return source
+        .split("`")
+        .filter((part) => part !== "")
+        .map((part, index) =>
+            index % 2 === 1
+                ? element("code", [], [{ type: "text", value: part }])
+                : { type: "text", value: part }
+        );
+}
+
+// A ```pipeline fence is one stage per line, `name | what happens | aside`,
+// rendered as the stepped ledger in globals.css rather than as a code block.
+// remark-rehype honours the hName/hChildren data, and rehype-pretty-code
+// never sees a <pre>.
+function remarkPipeline() {
+    const stages = (source: string): HastNode[] =>
+        source
+            .split("\n")
+            .filter((line) => line.trim() !== "")
+            .map((line, index) => {
+                const [name = "", detail = "", note = ""] = line
+                    .split("|")
+                    .map((part) => part.trim());
+                const body = inline(detail);
+                if (note) {
+                    body.push(element("span", ["pipeline-note"], inline(note)));
+                }
+                return element(
+                    "li",
+                    index === 0
+                        ? ["pipeline-step", "pipeline-entry"]
+                        : ["pipeline-step"],
+                    [
+                        element(
+                            "span",
+                            ["pipeline-name"],
+                            [{ type: "text", value: name }]
+                        ),
+                        element("span", ["pipeline-detail"], body),
+                    ]
+                );
+            });
+
+    const walk = (node: MarkdownNode) => {
+        for (const child of node.children ?? []) {
+            if (child.type === "code" && child.lang === "pipeline") {
+                // The code handler would wrap the list in <pre>; an unknown
+                // type takes the default handler, which builds from the data.
+                child.type = "pipeline";
+                child.data = {
+                    hName: "ol",
+                    hProperties: { className: ["pipeline", "not-prose"] },
+                    hChildren: stages(child.value ?? ""),
+                };
+            } else {
+                walk(child);
+            }
+        }
+    };
+
+    return (tree: MarkdownNode) => walk(tree);
+}
+
 export async function markdownToHTML(markdown: string) {
     const file = await unified()
         .use(remarkParse)
         .use(remarkGfm)
+        .use(remarkPipeline)
         .use(remarkRehype)
         .use(rehypeSlug)
         .use(rehypePrettyCode, {

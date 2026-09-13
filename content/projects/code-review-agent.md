@@ -36,28 +36,20 @@ Every decision below traces back to one of those.
 
 ## How it works
 
-    PR opened  ·  or review.py --local before the PR exists
-       │
-       ▼
-    listen ──► reactions, replies, commands ──► memory of rejections
-       │
-       ▼
-    fetch ──► diffs · full files at the head commit · .review.yml
-       │
-       ▼
-    context ──► the rest of the repo, chunked by function
-       │        (ast + tree-sitter), embedded, top 3 by cosine
-       ▼
-    lenses ──► security · correctness · dependencies · performance · infra
-       │        (tests and maintainability opt in)
-       ▼
-    merge ──► policy ──► verify ──► confidence ──► PR summary
-       │      (markers, suppressions, severity order, budget)
-       ▼
-    post ──► inline comments · suggestion blocks · summary · check-run
-       │
-       ▼
-    SQLite ──► FastAPI ──► Next.js dashboard
+```pipeline
+trigger | A pull request opens, or `review.py --local` runs before one exists
+listen | Reactions, replies and commands on the comments posted before | rejected findings join the repository's memory
+fetch | The diffs, the full file at the head commit, `.review.yml`
+context | The rest of the repository, chunked by function with `ast` and tree-sitter, embedded, the top three by cosine
+lenses | security · correctness · dependencies · performance · infra | tests and maintainability opt in
+merge | Findings from different lenses on the same or an adjacent line become one
+policy | Ignore markers, suppressions, learned suppressions, severity order, the comment budget
+verify | A second opinion quotes the added lines that prove each finding, or withdraws it
+confidence | A tier from the lens's measured precision and the verdict; `min_confidence` holds the rest back
+summary | One call over the whole PR: what changed, where to look first, description vs diff, breaking changes
+post | Inline comments, suggestion blocks, a summary comment edited in place, the check-run
+store | SQLite, read by FastAPI and the Next.js dashboard, with the cost on every row
+```
 
 Every step after the lenses is plain Python in one orchestrator file.
 
