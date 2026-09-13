@@ -788,6 +788,19 @@ section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .about-skill-hero {
+        min-height: 0;
+    }
+    .about-skill-greeting {
+        position: relative;
+        padding-block: 3rem;
+    }
+    .about-skill-hero .skill-scene {
+        position: relative;
+    }
+    .about-skill-hero .skill-scene[data-static] > div[aria-hidden] {
+        height: auto;
+    }
     .nav-link:hover .nav-link-label {
         transform: none;
     }

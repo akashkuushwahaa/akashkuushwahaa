@@ -237,7 +237,7 @@ export function SkillPhysics({ skills, className }: Props) {
                             pillRefs.current[index] = node;
                         }}
                         className={cn(
-                            "absolute left-0 top-0 cursor-grab select-none whitespace-nowrap rounded-full bg-muted px-7 py-4 text-lg opacity-0 will-change-transform active:cursor-grabbing",
+                            "absolute left-0 top-0 cursor-grab select-none whitespace-nowrap rounded-full bg-muted px-4 py-2 text-sm opacity-0 will-change-transform active:cursor-grabbing sm:px-5 sm:py-3 sm:text-base lg:px-7 lg:py-4 lg:text-lg",
                             TONES[index % TONES.length]
                         )}
                     >

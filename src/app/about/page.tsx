@@ -22,8 +22,8 @@ export default async function AboutPage() {
 
     return (
         <main id="main">
-            <section className="relative -mx-6 min-h-[calc(100svh-9rem)] overflow-hidden">
-                <div className="pointer-events-none absolute inset-x-0 top-[38%] z-10 px-6 text-center">
+            <section className="about-skill-hero relative -mx-6 min-h-[max(44rem,calc(100svh-9rem))] overflow-hidden">
+                <div className="about-skill-greeting pointer-events-none absolute inset-x-0 top-[12%] z-10 px-6 text-center sm:top-[20%] lg:top-[38%]">
                     <h1 className="text-display font-medium text-muted-foreground">
                         <AnimatedText afterTransition stagger={90}>
                             {GREETING}
