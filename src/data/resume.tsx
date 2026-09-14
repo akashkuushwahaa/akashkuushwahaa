@@ -6,12 +6,12 @@ export const DATA = {
     url: "https://akashkuushwahaa.vercel.app",
     location: "Ahmedabad, India",
     locationLink: "https://www.google.com/maps/place/ahmedabad",
-    description: "Full-stack engineer • LLM tooling in TypeScript and Python",
+    description: "AI engineer • LLM apps, agents and evals in TypeScript and Python",
     summary:
-        "I build full-stack web applications and LLM-powered tools, mostly in TypeScript and Python.\n\nThe work I care about sits where a product meets a model. It is easy to get a language model to produce something that looks correct. Getting it to produce something correct enough to put in front of a user, repeatedly, is a different problem, and it turns out to be an engineering problem more than a prompting one: retrieval, evaluation, guardrails, and knowing when to keep a human in the loop.\n\nThat is what the [Code Review Agent](/projects/code-review-agent) taught me. Its first version went from 0.82 to 0.914 F1 without a prompt change, because the retrieval changed. Its second version grew into seven measured lenses and a verifier that has to quote its evidence or withdraw, which took the security lens from 0.87 precision to 1.00. I only knew any of that because the labeled sets came before the prompts.\n\nBefore that I spent three months as an SDE intern at [CultureX](https://www.culturex.ai), shipping full-stack dashboard features on a weekly release cycle — the Next.js API routes behind them and the React interfaces on top. I am finishing a B.Tech in Computer Science & Engineering (AI & ML) at SAL Institute of Technology, expected 2027, and I am currently open to work.",
+        "I build LLM applications and AI agents in TypeScript and Python, and the evals and guardrails that make them safe to ship.\n\nThe work I care about sits where a product meets a model. It is easy to get a language model to produce something that looks correct. Getting it to produce something correct enough to put in front of a user, repeatedly, is a different problem, and it turns out to be an engineering problem more than a prompting one: retrieval, evaluation, guardrails, and knowing when to keep a human in the loop.\n\nThat is what the [Code Review Agent](/projects/code-review-agent) taught me. Its first version went from 0.82 to 0.914 F1 without a prompt change, because the retrieval changed. Its second version grew into seven measured lenses and a verifier that has to quote its evidence or withdraw, which took the security lens from 0.87 precision to 1.00. I only knew any of that because the labeled sets came before the prompts.\n\nBefore that I spent three months as an SDE intern at [CultureX](https://www.culturex.ai), shipping full-stack dashboard features on a weekly release cycle — the Next.js API routes behind them and the React interfaces on top. I am finishing a B.Tech in Computer Science & Engineering (AI & ML) at SAL Institute of Technology, expected 2027, and I am currently open to work.",
     hero: {
-        role: "Full-stack engineer",
-        focus: "LLM tooling in TypeScript and Python",
+        role: "AI engineer",
+        focus: "LLM apps, agents and evals in TypeScript and Python",
         headlineBefore: "I make language models ",
         headlineAccent: "behave",
         headlineAfter: " in production.",
@@ -23,7 +23,7 @@ export const DATA = {
         action: "Email me",
     },
     credentials: [
-        "Full-stack development and LLM tooling",
+        "LLM apps, agents and evaluation pipelines",
         "Weekly production releases at CultureX",
         "LLM evaluation with labeled test cases",
     ],

@@ -1,7 +1,7 @@
 <h1 align="center">Akash Kushwaha</h1>
 
 <p align="center">
-  Full-stack engineer · LLM tooling in TypeScript and Python <br/>
+  AI engineer · LLM apps, agents and evals in TypeScript and Python <br/>
   <sub>Ahmedabad, India · Open to work</sub>
 </p>
 
@@ -15,7 +15,7 @@
 
 ### About
 
-I build full-stack web applications and LLM-powered tools. The work I care about
+I build LLM applications and AI agents in TypeScript and Python. The work I care about
 sits where a product meets a model — getting one to produce something *correct
 enough to put in front of a user, repeatedly* turns out to be an engineering
 problem more than a prompting one: retrieval, evaluation, guardrails, and

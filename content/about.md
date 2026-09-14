@@ -1,7 +1,7 @@
 ---
 title: About
 slug: about
-summary: Full-stack engineer working in TypeScript and Python, currently focused on LLM tooling.
+summary: AI engineer working in TypeScript and Python, building LLM apps, agents and the evals behind them.
 order: 1
 ---
 
@@ -25,4 +25,4 @@ code with teammates taught me a lot about breaking work into manageable pieces.
 
 I’m finishing a B.Tech in Computer Science & Engineering (AI & ML) at SAL
 Institute of Technology, expected in 2027. I’m open to engineering roles where
-I can keep building full-stack products and work on LLM-powered features.
+I can keep building LLM-powered products and agents, and the evals behind them.

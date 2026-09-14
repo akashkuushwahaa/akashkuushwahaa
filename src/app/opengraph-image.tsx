@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-    "Akash Kushwaha — Full-stack engineer, LLM tooling in TypeScript and Python";
+    "Akash Kushwaha — AI engineer, LLM apps, agents and evals in TypeScript and Python";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -51,8 +51,8 @@ export default function OGImage() {
                             letterSpacing: "-1px",
                         }}
                     >
-                        Full-stack engineer · LLM tooling in TypeScript and
-                        Python
+                        AI engineer · LLM apps, agents and evals in TypeScript
+                        and Python
                     </div>
                 </div>
 
