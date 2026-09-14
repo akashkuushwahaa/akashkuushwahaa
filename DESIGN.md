@@ -244,11 +244,21 @@ the line length remains readable.
 - Anchored headings carry `scroll-margin-top: 7rem` so a table-of-contents jump
   does not land underneath the fixed nav.
 
+**Pipeline ledger.** Every case study's "How it works" is a ```` ```pipeline ````
+fence rendered by `remarkPipeline` (`src/data/content.ts`) as an ordered list
+and styled as `.pipeline` in `globals.css`: a hairline rail down the left, a
+solid violet marker per stage with a hollow ring on the entry stage, the
+stage name in the mono fact voice (10px, uppercase, `tracking-label`, violet
+step 11), the explanation in sans at 15px, and an optional aside in muted
+text beneath it. One column under `sm`. It replaced indented box-drawing
+diagrams, which could hold two or three words per stage and read as a
+terminal dump inside the prose.
+
 ## Deviations from the template
 
-1. **Line numbers are off for block code.** Every case study opens with an ASCII
-   pipeline diagram rather than source, and numbering the rows of a diagram is
-   noise. Line numbers remain available per-block via `data-line-numbers`.
+1. **Line numbers are off for block code.** The case studies carry no source
+   listings, and numbering the rows of a diagram is noise. Line numbers remain
+   available per-block via `data-line-numbers`.
 2. **Shiki's dark theme is class-scoped, not media-scoped.** The template keyed
    syntax colors to `prefers-color-scheme`, so code blocks ignored the site's own
    toggle. They now key to `.dark`.

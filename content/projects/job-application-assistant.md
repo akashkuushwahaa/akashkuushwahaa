@@ -26,22 +26,14 @@ a nice cover letter will happily claim you know Kubernetes.
 
 ## How it works
 
-    resume.pdf ──► pdfplumber ──► structured text
-                                       │
-                                       ▼
-    job post ──────────────────► 1. match analysis
-                                       │
-                                       ▼
-                                 2. gap identification
-                                       │
-                                       ▼
-                                 3. cover letter draft
-                                       │
-                                       ▼
-                                 4. resume rewrite
-                                       │
-                                       ▼
-                                 human review ──► send
+```pipeline
+parse | pdfplumber turns the resume PDF into structured text; the job posting is pasted in
+match | The first model call: how the parsed resume fits the posting
+gaps | The second: what the posting asks for that the resume does not show
+letter | The third: a cover letter drafted from the match, bound to facts in the parsed resume
+rewrite | The fourth: the resume re-emphasised for the role, never adding what is not there
+review | A human reads everything before anything is sent
+```
 
 ## Decisions that mattered
 

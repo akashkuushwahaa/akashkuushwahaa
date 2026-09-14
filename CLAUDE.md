@@ -85,12 +85,10 @@ All are statically generated at build time.
 
 **Markdown conventions.** Every content file opens with an H1 that repeats its
 frontmatter `title`; the loader strips that leading H1 so the page does not
-render it twice. A pipeline is a ````pipeline` fence, one stage per line as
+render it twice. Every case study's "How it works" is a ````pipeline` fence, one stage per line as
 `name | what happens | aside`; `remarkPipeline` in `content.ts` turns it into
-the `.pipeline` ledger styled in `globals.css`. Older architecture diagrams
-are indented code blocks of box-drawing characters — `globals.css` tightens
-`pre > code` line-height so the `│` runs connect. Do not restore the global line-number counters that shipped with the
-upstream template; they number those diagrams.
+the `.pipeline` ledger styled in `globals.css`. Do not restore the global
+line-number counters that shipped with the upstream template.
 
 **Animations.** `BlurFade` and `BlurFadeText` (`src/components/magicui/`)
 sequence section reveals off a `BLUR_FADE_DELAY = 0.04` constant. Both honor

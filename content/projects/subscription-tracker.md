@@ -27,16 +27,12 @@ lifecycle states, and the operational pieces that tutorials skip.
 
 ## How it works
 
-    client ──► Arcjet (rate limit + bot detection)
-                   │
-                   ▼
-              JWT middleware ──► role check
-                   │
-                   ▼
-            subscription routes ──► MongoDB
-                   ▲
-                   │
-            node-cron ──► renewal reminder emails
+```pipeline
+edge | Arcjet in front of the application: rate limiting and bot detection before a request reaches business logic
+auth | JWT verification and the role check as route-level middleware, declared where the route is declared
+routes | The subscription lifecycle over REST, persisted in MongoDB | active, cancelled, expired, renewing
+schedule | node-cron sweeps the upcoming renewals and sends reminder emails, independent of traffic
+```
 
 ## Decisions that mattered
 

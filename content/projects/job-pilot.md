@@ -30,16 +30,12 @@ tailoring the application, are both things an agent can do.
 
 ## How it works
 
-    Adzuna API ──► sourcing
-                      │
-                      ▼
-              Stagehand agent ──► company research (headless browser)
-                      │
-                      ▼
-    resume.pdf ──► profile extraction ──► matching and scoring
-                                                │
-                                                ▼
-                                    tailored resume PDF out
+```pipeline
+source | Live postings from the Adzuna API, deduplicated by a unique index in the schema rather than on read
+research | A Stagehand agent drives a headless browser through the company's careers pages, blog and postings | prose a candidate would read, none of it behind an endpoint
+match | The uploaded resume PDF is parsed into a structured profile, validated with Zod, and each posting is scored against it | matched and missing skills named
+tailor | A role-specific resume PDF, rewritten only from facts the parser extracted
+```
 
 Four stages, each independently inspectable. Postgres holds postings, profiles,
 and scores.
